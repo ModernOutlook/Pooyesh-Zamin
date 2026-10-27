@@ -67,7 +67,7 @@ export default {
     const body=await request.json(), items=body.items;
     if(!Array.isArray(items)||items.length>100) return json({error:"فهرست اقلام معتبر نیست."},400,headers);
     const result=await env.DB.prepare("INSERT INTO waste_records(user_id,items_json) VALUES(?,?)").bind(user.id,JSON.stringify(items)).run();
-    return json({ok:true,id:result.meta.last_row_id,post:{id:result.meta.last_row_id,content:content.trim(),category,images,createdAt:new Date().toISOString(),authorName:user.phone}},201,headers);
+    return json({ok:true,id:result.meta.last_row_id},201,headers);
    }
    if (path === "/api/posts" && method === "GET") {
     const {results}=await env.DB.prepare("SELECT posts.id,posts.content,posts.category,posts.images_json,posts.created_at,users.phone FROM posts JOIN users ON users.id=posts.user_id ORDER BY posts.id DESC LIMIT 100").all();
@@ -81,7 +81,7 @@ export default {
     else { const form=await request.formData(); content=String(form.get("content")||"");category=String(form.get("category")||"عمومی"); const uploaded=form.getAll("images"); if(uploaded.some(x=>x instanceof File && x.size>0)) return json({error:"بارگذاری تصویر هنوز فعال نشده؛ ابتدا R2 را پیکربندی کنید."},501,headers); }
     if(!content.trim()||content.length>10000||images.length>4) return json({error:"متن مطلب یا تعداد تصاویر معتبر نیست."},400,headers);
     const result=await env.DB.prepare("INSERT INTO posts(user_id,content,category,images_json) VALUES(?,?,?,?)").bind(user.id,content.trim(),category,JSON.stringify(images)).run();
-    return json({ok:true,id:result.meta.last_row_id},201,headers);
+    return json({ok:true,id:result.meta.last_row_id,post:{id:result.meta.last_row_id,content:content.trim(),category,images,createdAt:new Date().toISOString(),authorName:user.phone}},201,headers);
    }
    if (path.startsWith("/api/")) return json({error:"مسیر API پیدا نشد."},404,headers);
    return env.ASSETS.fetch(request);
