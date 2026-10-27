@@ -3,8 +3,16 @@
   "name": "pooyesh-zamin",
   "main": "src/index.js",
   "compatibility_date": "2026-10-28",
-  "assets": { "directory": "./public", "binding": "ASSETS", "not_found_handling": "single-page-application" },
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
+  },
   "d1_databases": [
-    { "binding": "DB", "database_name": "pooyesh-zamin-db", "database_id": "REPLACE_WITH_CLOUDFLARE_D1_DATABASE_ID" }
+    {
+      "binding": "DB",
+      "database_name": "pooyesh-zamin-db",
+      "database_id": "c94a81af-31c0-46db-9a94-f4b207ca1242"
+    }
   ]
 }
