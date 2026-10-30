@@ -1,4 +1,4 @@
-const CACHE='pooyesh-zamin-v1';
+const CACHE='pooyesh-assets-v2';
 const BASE=new URL('./',self.registration.scope);
 const CORE=['','index.html','manifest.webmanifest','icon.svg'].map(x=>new URL(x,BASE).href);
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
