@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f5f7f1"><meta name="description" content="پویش زمین؛ ثبت پسماند خشک و همراهی برای شهری پاک‌تر">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="پویش زمین">
-<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./logo.png" type="image/png"><link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./logo.png?v=20261031" type="image/png"><link rel="apple-touch-icon" sizes="180x180" href="./logo.png?v=20261031">
 <title>پویش زمین | قدمی کوچک برای زمینی پاک</title>
 <style>
 :root{--bg:#f5f7f1;--paper:#fff;--ink:#202b25;--muted:#738077;--line:#e7ece4;--green:#286b4d;--soft:#dceee1;--lime:#d6e8a7;--shadow:0 14px 38px #1f3e2a12}
@@ -13,10 +13,10 @@
 </style>
 </head>
 <body><div class="app">
-<header class="top"><a class="brand" href="#"><img src="./logo.png" alt="لوگوی پویش زمین"><span>پویش زمین<small>با هم برای زمین پاک‌تر</small></span></a><div class="actions"><span class="status" id="mode">ذخیره روی همین دستگاه</span><button class="btn plain small" id="install">＋ نصب برنامه</button><button class="btn primary small" id="auth-open">ورود / ثبت‌نام</button><button class="btn soft small" id="logout" hidden>خروج</button></div></header>
+<header class="top"><a class="brand" href="#"><img src="./logo.png?v=20261031" alt="نشان پویش زمین"><span>پویش زمین<small>با هم برای زمین پاک‌تر</small></span></a><div class="actions"><span class="status" id="mode">ذخیره روی همین دستگاه</span><button class="btn plain small" id="install">＋ نصب برنامه</button><button class="btn primary small" id="auth-open">ورود / ثبت‌نام</button><button class="btn soft small" id="logout" hidden>خروج</button></div></header>
 <main>
 <section class="page active" id="home">
-<div class="hero"><div class="hero-text"><span class="eyebrow">♻ پویش زمین؛ انتخابی برای آینده</span><h1>هر قدم کوچک،<br>تغییری بزرگ برای زمین</h1><p>پسماند خشک را جدا کن، وزنش را ثبت کن و سهم خودت را در ساختن شهری پاک‌تر ببین.</p><div><button class="btn" style="background:var(--lime);color:#244a36" data-go="record">ثبت پسماند من ←</button> <button class="btn plain" style="background:#ffffff18;color:white;border-color:#ffffff44" data-go="community">همراهان پویش</button></div></div><div class="hero-art"><div class="earth"><img src="./logo.png" alt="نشان پویش زمین"></div><span class="bubble b1">تفکیک از مبدأ</span><span class="bubble b2">زمین، خانه‌ی ماست</span></div></div>
+<div class="hero"><div class="hero-text"><span class="eyebrow">♻ پویش زمین؛ انتخابی برای آینده</span><h1>هر قدم کوچک،<br>تغییری بزرگ برای زمین</h1><p>پسماند خشک را جدا کن، وزنش را ثبت کن و سهم خودت را در ساختن شهری پاک‌تر ببین.</p><div><button class="btn" style="background:var(--lime);color:#244a36" data-go="record">ثبت پسماند من ←</button> <button class="btn plain" style="background:#ffffff18;color:white;border-color:#ffffff44" data-go="community">همراهان پویش</button></div></div><div class="hero-art"><div class="earth"><img src="./logo.png?v=20261031" alt="نشان پویش زمین" width="240" height="273" fetchpriority="high"></div><span class="bubble b1">تفکیک از مبدأ</span><span class="bubble b2">زمین، خانه‌ی ماست</span></div></div>
 <div class="head"><div><h2>اثر تو تا امروز</h2><p>بر اساس سوابق ثبت‌شده در این برنامه</p></div><span class="tag" id="data-mode">محلی</span></div>
 <div class="stats"><div class="stat"><div class="ico">⚖️</div><div><strong id="total">۰</strong><span>کیلوگرم پسماند ثبت‌شده</span></div></div><div class="stat"><div class="ico">🧾</div><div><strong id="count">۰</strong><span>نوبت مشارکت</span></div></div><div class="stat"><div class="ico">🌍</div><div><strong id="types">۰</strong><span>نوع پسماند جداشده</span></div></div></div>
 <div class="head"><div><h2>چه چیزی برای بازیافت داری؟</h2><p>برای ثبت سریع، یک دسته را انتخاب کن</p></div><button class="btn soft small" data-go="record">همه موارد</button></div>

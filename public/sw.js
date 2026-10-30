@@ -1,6 +1,6 @@
-const CACHE='pooyesh-assets-v2';
+const CACHE='pooyesh-assets-v3';
 const BASE=new URL('./',self.registration.scope);
-const CORE=['','index.html','manifest.webmanifest','icon.svg'].map(x=>new URL(x,BASE).href);
+const CORE=['','index.html','manifest.webmanifest','logo.png','logo.png?v=20261031','icon.svg'].map(x=>new URL(x,BASE).href);
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{
