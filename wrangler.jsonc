@@ -3,16 +3,9 @@
   "name": "pooyesh-zamin",
   "main": "src/index.js",
   "compatibility_date": "2026-10-28",
-  "assets": {
-    "directory": "./public",
-    "binding": "ASSETS",
-    "not_found_handling": "single-page-application"
-  },
+  "assets": { "directory": "./public", "binding": "ASSETS", "not_found_handling": "single-page-application" },
   "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "pooyesh-zamin-db",
-      "database_id": "c94a81af-31c0-46db-9a94-f4b207ca1242"
-    }
-  ]
+    { "binding": "DB", "database_name": "pooyesh-zamin-db", "database_id": "c94a81af-31c0-46db-9a94-f4b207ca1242" }
+  ],
+  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "pooyesh-zamin-media" }]
 }
