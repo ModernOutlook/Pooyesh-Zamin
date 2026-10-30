@@ -1,5 +1,13 @@
 const json = (data, status = 200, headers = {}) => new Response(JSON.stringify(data), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", ...headers } });
-const corsHeaders = { "x-content-type-options": "nosniff", "referrer-policy": "strict-origin-when-cross-origin" };
+const corsHeaders = { "x-content-type-options": "nosniff", "referrer-policy": "strict-origin-when-cross-origin", "vary": "Origin" };
+const allowedOrigins = new Set(["https://modernoutlook.github.io", "https://pooyesh-zamin.pages.dev"]);
+function corsFor(request) {
+  const origin = request.headers.get("origin");
+  const ownOrigin = new URL(request.url).origin;
+  if (!origin || origin === ownOrigin) return { ...corsHeaders };
+  if (!allowedOrigins.has(origin)) return null;
+  return { ...corsHeaders, "access-control-allow-origin": origin, "access-control-allow-credentials": "true" };
+}
 const enc = new TextEncoder();
 const bytesToHex = (bytes) => [...new Uint8Array(bytes)].map(b => b.toString(16).padStart(2, "0")).join("");
 async function sha256(value) { return bytesToHex(await crypto.subtle.digest("SHA-256", enc.encode(value))); }
@@ -9,7 +17,7 @@ async function passwordHash(password, salt) {
   return bytesToHex(bits);
 }
 function cookie(request, name) { return (request.headers.get("cookie") || "").split(";").map(v => v.trim()).find(v => v.startsWith(name + "="))?.slice(name.length + 1) || ""; }
-function secureCookie(token, maxAge) { return `session=${token}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=${maxAge}`; }
+function secureCookie(token, maxAge) { return `session=${token}; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=${maxAge}`; }
 async function currentUser(request, env) {
   const token = cookie(request, "session"); if (!token) return null;
   const tokenHash = await sha256(token);
@@ -23,9 +31,10 @@ function sameOrigin(request) {
 export default {
  async fetch(request, env) {
   const url = new URL(request.url), path = url.pathname, method = request.method;
-  const headers = { ...corsHeaders };
+  const headers = corsFor(request);
+  if (path.startsWith("/api/") && !headers) return json({error:"درخواست از مبدأ غیرمجاز است."},403,corsHeaders);
   if (method === "OPTIONS") return new Response(null, {status:204, headers:{...headers,"access-control-allow-methods":"GET,POST,OPTIONS","access-control-allow-headers":"content-type"}});
-  if (path.startsWith("/api/") && !sameOrigin(request)) return json({error:"درخواست از مبدأ غیرمجاز است."},403,headers);
+  if (path.startsWith("/api/") && request.headers.get("origin") && !headers["access-control-allow-origin"] && new URL(request.url).origin !== request.headers.get("origin")) return json({error:"درخواست از مبدأ غیرمجاز است."},403,corsHeaders);
   try {
    if (path === "/api/health" && method === "GET") {
     await env.DB.prepare("SELECT 1").first(); return json({ok:true, service:"pooyesh-zamin-api"},200,headers);
