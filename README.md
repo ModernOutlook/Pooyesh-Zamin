@@ -1,26 +1,40 @@
 # پویش زمین
 
-رابط کاربری فارسی و راست‌چین به‌همراه API روی Cloudflare Workers و ذخیره‌سازی D1.
+فرانت‌اند فارسی، راست‌چین و واکنش‌گرا برای ثبت پسماند خشک، مشارکت اجتماعی و نصب به‌صورت PWA روی Android و iOS.
 
-## وضعیت فعلی
-- API اولیه در `src/index.js`: ثبت‌نام، ورود، خروج، وضعیت نشست، سوابق پسماند و فهرست/انتشار مطالب.
-- طرح پایگاه داده در `schema.sql`.
-- تنظیمات Worker و Assets در `wrangler.jsonc`.
-- **فایل اصلی رابط کاربری هنوز باید در `public/index.html` قرار بگیرد.**
-- **استقرار زنده انجام نشده است**؛ شناسه D1 و تنظیمات دسترسی Cloudflare هنوز تأیید نشده‌اند.
+## امکانات
+- داشبورد وزن پسماند، تعداد مشارکت‌ها و تنوع دسته‌ها
+- ثبت پسماند کاغذ، پلاستیک، فلز، شیشه، الکترونیکی، منسوجات و سایر
+- سوابق محلی با پشتیبانی پایه آفلاین
+- صفحه پیام‌های اجتماعی
+- طراحی واکنش‌گرا و نصب به‌صورت PWA
+- اتصال به API Worker برای ورود، ثبت‌نام، سوابق و پیام‌ها در حالت same-origin
 
-## انتشار با Cloudflare Workers (رایگان با workers.dev)
-1. در مخزن، فایل HTML پیوست را با نام `public/index.html` بارگذاری کنید.
-2. در Cloudflare، یک D1 Database با نام `pooyesh-zamin-db` بسازید و `database_id` واقعی را در `wrangler.jsonc` وارد کنید.
-3. در محیطی که Node.js دارد، از ریشه پروژه اجرا کنید:
-   `npm install`
-   `npx wrangler login`
-   `npx wrangler d1 execute pooyesh-zamin-db --remote --file=./schema.sql`
-   `npx wrangler deploy`
-4. آدرس `https://pooyesh-zamin.<YOUR-SUBDOMAIN>.workers.dev` را در خروجی deploy بردارید و `/api/health` را برای بررسی API باز کنید.
+## انتشار روی GitHub Pages
+Workflow در `.github/workflows/deploy-pages.yml` پوشه `public/` را با هر push به `main` منتشر می‌کند.
 
-## امنیت و محدودیت‌ها
-- گذرواژه‌ها با PBKDF2 هش می‌شوند و شناسه نشست در کوکی HttpOnly/Secure نگه‌داری می‌شود.
-- برای انتشار عمومی، محدودسازی نرخ درخواست، تأیید شماره همراه، بازیابی گذرواژه، سیاست حریم خصوصی و آزمون امنیتی لازم است.
-- بارگذاری واقعی تصویر در پست‌ها هنوز پیاده‌سازی نشده و به Cloudflare R2 نیاز دارد.
-- هر قابلیت فرانت‌اندی که هنوز فقط از `localStorage` استفاده می‌کند، به‌صورت خودکار به ذخیره‌سازی مشترک تبدیل نمی‌شود؛ باید اتصال آن به API به‌طور جداگانه انجام و آزمون شود.
+1. در GitHub به Settings → Pages بروید.
+2. گزینه Build and deployment → Source را روی GitHub Actions قرار دهید.
+3. پس از push، اجرای Workflow را در زبانه Actions بررسی کنید.
+4. آدرس Pages معمولاً `https://modernoutlook.github.io/Pooyesh-Zamin/` است.
+
+در Android از منوی مرورگر Install app / Add to Home Screen را بزنید. در iPhone/iPad از Safari، Share و سپس Add to Home Screen را انتخاب کنید.
+
+## API و ذخیره‌سازی
+- وقتی فرانت‌اند از همان Worker ارائه شود، API مسیرهای `/api/*` و نشست امن HttpOnly هم‌مبدأ استفاده می‌شوند.
+- در GitHub Pages، ثبت‌ها و پیام‌های مهمان فقط در localStorage همان مرورگر/دستگاه ذخیره می‌شوند. همگام‌سازی حساب از مبدأ GitHub Pages عمداً فعال نشده است تا کوکی‌های نشست ناامن cross-site استفاده نشوند.
+- برای حساب‌های مشترک و داده‌های همگام‌شده، Worker را مستقر کنید تا فرانت‌اند و API از یک مبدأ باشند.
+
+## راه‌اندازی Worker و D1
+```bash
+npm install
+npx wrangler login
+npx wrangler d1 execute pooyesh-zamin-db --remote --file=./schema.sql
+npx wrangler deploy
+```
+بررسی API از مسیر `/api/health` انجام می‌شود.
+
+## محدودیت‌ها
+- پیام و رکورد مهمان در GitHub Pages بین دستگاه‌ها همگام نمی‌شود.
+- API فعلی بارگذاری تصویر و رزرو زمان جمع‌آوری را پیاده‌سازی نکرده است.
+- پیش از استفاده عمومی، rate limiting، تأیید شماره همراه، بازیابی گذرواژه، سیاست حریم خصوصی و آزمون امنیتی لازم است.
