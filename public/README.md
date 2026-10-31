@@ -1,1 +1,0 @@
-این پوشه شامل فایل‌های استاتیک PWA است. `index.html` تنها ورودی رابط وب است و Service Worker دارایی‌های همین رابط را ذخیره می‌کند. پنل شرکت در `company.html` قرار دارد و API آن از مبدأ Cloudflare Pages (`https://pooyesh-zamin.pages.dev`) فراخوانی می‌شود. رابط قدیمی `dark.html` و سازوکار جابه‌جایی تم حذف شده‌اند.
