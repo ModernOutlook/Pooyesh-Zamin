@@ -1,0 +1,47 @@
+name: Pull request validation
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package.json
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Check Worker JavaScript syntax
+        run: node --check src/index.js
+      - name: Validate both interface entry points and switch persistence
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const light = fs.readFileSync('public/index.html', 'utf8');
+          const dark = fs.readFileSync('public/dark.html', 'utf8');
+          const sw = fs.readFileSync('public/sw.js', 'utf8');
+          for (const [name, html, target] of [
+            ['light', light, './dark.html'],
+            ['dark', dark, './index.html'],
+          ]) {
+            assert.match(html, /id="theme-switch"/, name + ' theme switch missing');
+            assert.match(html, /pooyesh-interface-v1/, name + ' preference key missing');
+            assert.ok(html.includes(target), name + ' switch target missing');
+            assert.match(html, /localStorage\.setItem/, name + ' preference persistence missing');
+          }
+          assert.match(sw, /dark\.html/, 'dark page must be in offline precache');
+          assert.match(sw, /caches\.match\(r\)/, 'navigation fallback must respect requested path');
+          console.log('Both themes, preference persistence and offline navigation checks passed.');
+          NODE
+      - name: Wrangler configuration dry run
+        run: npx wrangler@4 deploy --dry-run
