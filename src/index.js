@@ -39,8 +39,8 @@ export default {
     await env.DB.prepare("SELECT 1").first(); return json({ok:true, service:"pooyesh-zamin-api"},200,headers);
    }
    if (path === "/api/auth/register" && method === "POST") {
-    const body = await request.json(), phone = String(body.phone||"").trim(), password = String(body.password||"");
-    if (!/^\+?[0-9۰-۹]{10,15}$/.test(phone) || password.length < 10) return json({error:"شماره همراه یا گذرواژه معتبر نیست؛ گذرواژه باید دست‌کم ۱۰ نویسه باشد."},400,headers);
+    const body = await request.json(), phone = String(body.phone||"").trim(), password = String(body.password||""), name = String(body.name||"").trim(), accountType = String(body.accountType||"home"), address = String(body.address||"").trim(), area = String(body.area||"").trim();
+    if (!/^\+?[0-9۰-۹]{10,15}$/.test(phone) || password.length < 10 || !name || name.length > 120 || !["collector","home"].includes(accountType) || address.length > 500 || area.length > 120) return json({error:"اطلاعات ثبت‌نام معتبر نیست؛ نام و شماره همراه لازم است و گذرواژه باید دست‌کم ۱۰ نویسه باشد."},400,headers);
     const salt = bytesToHex(crypto.getRandomValues(new Uint8Array(16))), hash = await passwordHash(password, salt);
     let result; try { result = await env.DB.prepare("INSERT INTO users(phone,password_hash,name,account_type,address,area) VALUES(?,?,?,?,?,?)").bind(phone, salt+":"+hash,name,accountType,address,area).run(); } catch { return json({error:"این شماره همراه قبلاً ثبت شده یا اطلاعات نامعتبر است."},409,headers); }
     const token = bytesToHex(crypto.getRandomValues(new Uint8Array(32))), tokenHash = await sha256(token), expires = Math.floor(Date.now()/1000)+604800;
