@@ -331,7 +331,8 @@ private fun LoginPanel(
     var url by remember { mutableStateOf(initialUrl) }
     var phone by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var fullName by remember { mutableStateOf("") }\n    var accountType by remember { mutableStateOf("home") }
+    var fullName by remember { mutableStateOf("") }
+    var accountType by remember { mutableStateOf("home") }
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
