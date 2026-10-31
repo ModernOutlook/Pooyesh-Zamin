@@ -75,11 +75,9 @@ jobs:
           java-version: '17'
       - uses: android-actions/setup-android@v3
         if: ${{ hashFiles('android/app/build.gradle.kts') != '' }}
-        with:
-          packages: |
-            platform-tools
-            platforms;android-35
-            build-tools;35.0.0
+      - name: Install Android SDK packages
+        if: ${{ hashFiles('android/app/build.gradle.kts') != '' }}
+        run: sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
       - uses: gradle/actions/setup-gradle@v4
         if: ${{ hashFiles('android/app/build.gradle.kts') != '' }}
         with:
