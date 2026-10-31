@@ -13,7 +13,7 @@
 </style>
 </head>
 <body><div class="app">
-<header class="top"><a class="brand" href="#"><img src="./logo.png?v=20261031" alt="نشان پویش زمین"><span>پویش زمین<small>با هم برای زمین پاک‌تر</small></span></a><div class="actions"><span class="status" id="mode">ذخیره روی همین دستگاه</span><button class="btn plain small" id="install">＋ نصب برنامه</button><button class="btn primary small" id="auth-open">ورود / ثبت‌نام</button><button class="btn soft small" id="logout" hidden>خروج</button></div></header>
+<header class="top"><a class="brand" href="#"><img src="./logo.png?v=20261031" alt="نشان پویش زمین"><span>پویش زمین<small>با هم برای زمین پاک‌تر</small></span></a><div class="actions"><span class="status" id="mode">ذخیره روی همین دستگاه</span><button class="btn plain small" id="install">＋ نصب برنامه</button><a class="btn soft small" id="theme-switch" href="./dark.html" aria-label="تغییر به رابط تیره و طلایی">تیره و طلایی</a><button class="btn primary small" id="auth-open">ورود / ثبت‌نام</button><button class="btn soft small" id="logout" hidden>خروج</button></div></header>
 <main>
 <section class="page active" id="home">
 <div class="hero"><div class="hero-text"><span class="eyebrow">♻ پویش زمین؛ انتخابی برای آینده</span><h1>هر قدم کوچک،<br>تغییری بزرگ برای زمین</h1><p>پسماند خشک را جدا کن، وزنش را ثبت کن و سهم خودت را در ساختن شهری پاک‌تر ببین.</p><div><button class="btn" style="background:var(--lime);color:#244a36" data-go="record">ثبت پسماند من ←</button> <button class="btn plain" style="background:#ffffff18;color:white;border-color:#ffffff44" data-go="community">همراهان پویش</button></div></div><div class="hero-art"><div class="earth"><img src="./logo.png?v=20261031" alt="نشان پویش زمین" width="240" height="273" fetchpriority="high"></div><span class="bubble b1">تفکیک از مبدأ</span><span class="bubble b2">زمین، خانه‌ی ماست</span></div></div>
@@ -64,5 +64,18 @@ $('#install').addEventListener('click',async()=>{if(promptEvent){promptEvent.pro
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();promptEvent=e});
 if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 init();
+})();
+</script><script>
+(function(){
+ const key='pooyesh-interface-v1';
+ const darkPage=location.pathname.endsWith('/dark.html');
+ try {
+  const saved=localStorage.getItem(key);
+  if(darkPage && saved==='light'){location.replace('./index.html');return;}
+  if(!darkPage && saved==='dark'){location.replace('./dark.html');return;}
+  if(!saved)localStorage.setItem(key,darkPage?'dark':'light');
+ } catch (_) {}
+ const link=document.getElementById('theme-switch');
+ if(link)link.addEventListener('click',()=>{try{localStorage.setItem(key,darkPage?'light':'dark')}catch(_){}});
 })();
 </script></body></html>
