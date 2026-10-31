@@ -20,12 +20,10 @@
 ## D1 و migrationها
 - `schema.sql` ساختار کامل پایگاه برای ایجاد دیتابیس تازه را توصیف می‌کند.
 - migrationهای `0001` تا `0004` به‌ترتیب جدول‌های اصلی، سوابق مکانی، ارتفاع تصویربرداری و ستون‌های پروفایل را ایجاد/تکمیل می‌کنند.
-- بررسی خواندنی پایگاه متصل در 2026-10-31 نشان داد `location_records` و ستون `capture_height_m` موجودند، اما ستون‌های پروفایل `users` وجود ندارند و جدول تاریخچهٔ migration نیز دیده نشد.
-- روی پایگاه فعلی، migrationهای 0001 تا 0003 یا `schema.sql` را دوباره اجرا نکنید. پس از تهیهٔ نسخهٔ پشتیبان، با `PRAGMA table_info(users)` نبودن ستون‌های پروفایل را دوباره تأیید کنید؛ سپس فقط migration 0004 را یک‌بار اجرا کنید:
-  ```sh
-  npx wrangler d1 execute pooyesh-zamin-db --remote --file=./migrations/0004_user_profile.sql
-  ```
-- برای دیتابیس تازه، از `schema.sql` یا زنجیرهٔ migrationها استفاده کنید؛ هر دو را پشت سر هم اجرا نکنید.
+- در 2026-10-31، پیش از تغییر D1 عملیاتی، خروجی SQL پشتیبان تهیه و bookmark بازیابی Time Travel ثبت شد.
+- migration شمارهٔ `0004_user_profile.sql` با موفقیت روی دیتابیس عملیاتی `pooyesh-zamin-db` اجرا و با `PRAGMA table_info(users)` تأیید شد. ستون‌های `name`، `account_type`، `address` و `area` اکنون وجود دارند.
+- در زمان اجرای migration جدول `users` خالی بود؛ هیچ رکورد کاربری برای backfill یا تغییر وجود نداشت.
+- روی دیتابیس عملیاتی، migrationهای 0001 تا 0003 یا `schema.sql` را دوباره اجرا نکنید. برای ایجاد دیتابیس تازه، از `schema.sql` یا زنجیرهٔ migrationها استفاده کنید؛ هر دو را پشت سر هم اجرا نکنید.
 
 ## Android
 پروژه در پوشهٔ `android/` قرار دارد. ساخت APK آزمایشی:
@@ -41,4 +39,7 @@ gradle -p android assembleDebug
 - مقدار secret را در کد، مخزن یا گفتگو قرار ندهید.
 
 ## اعتبارسنجی و انتشار
-GitHub Actions، syntax Worker، هر دو رابط PWA، تنظیمات Wrangler، اجرای ترتیبی migrationها روی SQLite موقت و ساخت APK آزمایشی را بررسی می‌کند. هیچ migration عملیاتی، فعال‌سازی R2، ساخت secret یا deploy در این مرحله انجام نشده است.
+GitHub Actions، syntax Worker، هر دو رابط PWA، تنظیمات Wrangler، اجرای ترتیبی migrationها روی SQLite موقت و ساخت APK آزمایشی را بررسی می‌کند. هر دو PR در 2026-10-31 ادغام شدند و انتشار خودکار Cloudflare Pages از شاخهٔ `main` آغاز شد.
+- R2 در حساب متصل هنوز فعال نیست؛ تا فعال‌سازی R2، ساخت bucket خصوصی `pooyesh-zamin-media` و افزودن binding با نام `MEDIA` به Pages Functions، بارگذاری تصاویر کار نخواهد کرد.
+- secret با نام `COMPANY_ACCESS_TOKEN` باید در محیط Pages Functions ثبت شود؛ مقدار secret را در کد، مخزن یا گفتگو قرار ندهید.
+- ادغام کد و migration D1 انجام شده است؛ تنظیم R2 و secret و آزمون دستگاه Android هنوز باقی است.
