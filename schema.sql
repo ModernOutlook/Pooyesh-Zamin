@@ -2,6 +2,10 @@ CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   phone TEXT NOT NULL UNIQUE,
   password_hash TEXT NOT NULL,
+  name TEXT NOT NULL DEFAULT '',
+  account_type TEXT NOT NULL DEFAULT 'home',
+  address TEXT NOT NULL DEFAULT '',
+  area TEXT NOT NULL DEFAULT '',
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 CREATE TABLE IF NOT EXISTS sessions (
