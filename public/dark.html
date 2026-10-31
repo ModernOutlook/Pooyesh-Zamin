@@ -440,7 +440,25 @@ body.theme-light .empty{color:var(--muted);border-color:var(--line)}
 @media(max-width:850px){.hero{padding:42px 0}.hero-grid{gap:18px}}
 </style>
 
-<style>:root{--gold:#c5a45a;--gold-light:#e0c77e;--emerald:#12a878;--glow:0 0 28px #c5a45a33}</style>\n</head>
+<style>:root{--gold:#c5a45a;--gold-light:#e0c77e;--emerald:#12a878;--glow:0 0 28px #c5a45a33}</style>\n<script>
+(function(){
+ const key='pooyesh-interface-v1';
+ const darkPage=location.pathname.endsWith('/dark.html');
+ try {
+  const saved=localStorage.getItem(key);
+  if(darkPage && saved==='light'){location.replace('./index.html');return;}
+  if(!darkPage && saved==='dark'){location.replace('./dark.html');return;}
+  if(!saved)localStorage.setItem(key,darkPage?'dark':'light');
+ } catch (_) {}
+ document.addEventListener('DOMContentLoaded',function(){
+  const link=document.getElementById('theme-switch');
+  if(link)link.addEventListener('click',function(){
+   try{localStorage.setItem(key,darkPage?'light':'dark')}catch(_){}
+  });
+ });
+})();
+</script>
+</head>
 <body>
 <header>
   <div class="wrap nav">
