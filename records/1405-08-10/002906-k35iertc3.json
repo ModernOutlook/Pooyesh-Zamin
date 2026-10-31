@@ -1,0 +1,19 @@
+{
+  "id": "k35iertc3",
+  "company": "پویش زمین",
+  "date": {
+    "jalali": "1405-08-10",
+    "time": "00:29:06",
+    "timezone": "Asia/Tehran",
+    "iso": "2026-10-31T20:59:06.509Z"
+  },
+  "address": "فغ، یثس، لتن، سس، 45",
+  "location": null,
+  "photo": null,
+  "wasteItems": [
+    "آهن معمولی",
+    "آهن سنگین",
+    "مس",
+    "آرمیچر"
+  ]
+}
