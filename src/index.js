@@ -21,7 +21,7 @@ function secureCookie(token, maxAge) { return `session=${token}; HttpOnly; Secur
 async function currentUser(request, env) {
   const token = cookie(request, "session"); if (!token) return null;
   const tokenHash = await sha256(token);
-  const row = await env.DB.prepare("SELECT users.id, users.phone FROM sessions JOIN users ON users.id=sessions.user_id WHERE sessions.token_hash=? AND sessions.expires_at>?").bind(tokenHash, Math.floor(Date.now()/1000)).first();
+  const row = await env.DB.prepare("SELECT users.id, users.phone, users.name, users.account_type AS accountType, users.address, users.area FROM sessions JOIN users ON users.id=sessions.user_id WHERE sessions.token_hash=? AND sessions.expires_at>?").bind(tokenHash, Math.floor(Date.now()/1000)).first();
   return row || null;
 }
 function sameOrigin(request) {
@@ -40,23 +40,23 @@ export default {
     await env.DB.prepare("SELECT 1").first(); return json({ok:true, service:"pooyesh-zamin-api"},200,headers);
    }
    if (path === "/api/auth/register" && method === "POST") {
-    const body = await request.json(), phone = String(body.phone||"").trim(), password = String(body.password||"");
-    if (!/^\+?[0-9۰-۹]{10,15}$/.test(phone) || password.length < 10) return json({error:"شماره همراه یا گذرواژه معتبر نیست؛ گذرواژه باید دست‌کم ۱۰ نویسه باشد."},400,headers);
+    const body = await request.json(), phone = String(body.phone||"").trim(), password = String(body.password||""), name = String(body.name||"").trim(), accountType = String(body.accountType||"home"), address = String(body.address||"").trim(), area = String(body.area||"").trim();
+    if (!/^\+?[0-9۰-۹]{10,15}$/.test(phone) || password.length < 10 || !name || name.length > 120 || !["collector","home"].includes(accountType) || address.length > 500 || area.length > 120) return json({error:"اطلاعات ثبت‌نام معتبر نیست؛ نام و شماره همراه لازم است و گذرواژه باید دست‌کم ۱۰ نویسه باشد."},400,headers);
     const salt = bytesToHex(crypto.getRandomValues(new Uint8Array(16))), hash = await passwordHash(password, salt);
-    let result; try { result = await env.DB.prepare("INSERT INTO users(phone,password_hash) VALUES(?,?)").bind(phone, salt+":"+hash).run(); } catch { return json({error:"این شماره همراه قبلاً ثبت شده یا اطلاعات نامعتبر است."},409,headers); }
+    let result; try { result = await env.DB.prepare("INSERT INTO users(phone,password_hash,name,account_type,address,area) VALUES(?,?,?,?,?,?)").bind(phone, salt+":"+hash, name, accountType, address, area).run(); } catch { return json({error:"این شماره همراه قبلاً ثبت شده یا اطلاعات نامعتبر است."},409,headers); }
     const token = bytesToHex(crypto.getRandomValues(new Uint8Array(32))), tokenHash = await sha256(token), expires = Math.floor(Date.now()/1000)+604800;
     await env.DB.prepare("INSERT INTO sessions(token_hash,user_id,expires_at) VALUES(?,?,?)").bind(tokenHash,result.meta.last_row_id,expires).run();
-    return json({ok:true,user:{id:result.meta.last_row_id,phone}},201,{...headers,"set-cookie":secureCookie(token,604800)});
+    return json({ok:true,user:{id:result.meta.last_row_id,phone,name,accountType,address,area}},201,{...headers,"set-cookie":secureCookie(token,604800)});
    }
    if (path === "/api/auth/login" && method === "POST") {
     const body = await request.json(), phone = String(body.phone||"").trim(), password = String(body.password||"");
-    const user = await env.DB.prepare("SELECT id,phone,password_hash FROM users WHERE phone=?").bind(phone).first();
+    const user = await env.DB.prepare("SELECT id,phone,password_hash,name,account_type,address,area FROM users WHERE phone=?").bind(phone).first();
     if (!user) return json({error:"شماره همراه یا گذرواژه اشتباه است."},401,headers);
     const [salt, stored] = user.password_hash.split(":");
     if (await passwordHash(password,salt) !== stored) return json({error:"شماره همراه یا گذرواژه اشتباه است."},401,headers);
     const token=bytesToHex(crypto.getRandomValues(new Uint8Array(32))), expires=Math.floor(Date.now()/1000)+604800;
     await env.DB.prepare("INSERT INTO sessions(token_hash,user_id,expires_at) VALUES(?,?,?)").bind(await sha256(token),user.id,expires).run();
-    return json({ok:true,user:{id:user.id,phone:user.phone}},200,{...headers,"set-cookie":secureCookie(token,604800)});
+    return json({ok:true,user:{id:user.id,phone:user.phone,name:user.name,accountType:user.account_type,address:user.address,area:user.area}},200,{...headers,"set-cookie":secureCookie(token,604800)});
    }
    if (path === "/api/auth/logout" && method === "POST") {
     const token=cookie(request,"session"); if(token) await env.DB.prepare("DELETE FROM sessions WHERE token_hash=?").bind(await sha256(token)).run();
@@ -79,8 +79,8 @@ export default {
     return json({ok:true,id:result.meta.last_row_id},201,headers);
    }
    if (path === "/api/posts" && method === "GET") {
-    const {results}=await env.DB.prepare("SELECT posts.id,posts.content,posts.category,posts.images_json,posts.created_at,users.phone FROM posts JOIN users ON users.id=posts.user_id ORDER BY posts.id DESC LIMIT 100").all();
-    return json({posts:results.map(p=>({id:p.id,content:p.content,category:p.category,images:JSON.parse(p.images_json),created_at:p.created_at,author:p.phone}))},200,headers);
+    const {results}=await env.DB.prepare("SELECT posts.id,posts.content,posts.category,posts.images_json,posts.created_at,users.phone,users.name FROM posts JOIN users ON users.id=posts.user_id ORDER BY posts.id DESC LIMIT 100").all();
+    return json({posts:results.map(p=>({id:p.id,content:p.content,category:p.category,images:JSON.parse(p.images_json),created_at:p.created_at,author:p.phone,authorName:p.name || p.phone,createdAt:p.created_at}))},200,headers);
    }
    if (path === "/api/posts" && method === "POST") {
     if(!user) return json({error:"برای انتشار مطلب ابتدا وارد شوید."},401,headers);
@@ -90,7 +90,7 @@ export default {
     else { const form=await request.formData(); content=String(form.get("content")||"");category=String(form.get("category")||"عمومی"); const uploaded=form.getAll("images"); if(uploaded.some(x=>x instanceof File && x.size>0)) return json({error:"بارگذاری تصویر هنوز فعال نشده؛ ابتدا R2 را پیکربندی کنید."},501,headers); }
     if(!content.trim()||content.length>10000||images.length>4) return json({error:"متن مطلب یا تعداد تصاویر معتبر نیست."},400,headers);
     const result=await env.DB.prepare("INSERT INTO posts(user_id,content,category,images_json) VALUES(?,?,?,?)").bind(user.id,content.trim(),category,JSON.stringify(images)).run();
-    return json({ok:true,id:result.meta.last_row_id},201,headers);
+    return json({ok:true,id:result.meta.last_row_id,post:{id:result.meta.last_row_id,content:content.trim(),category,images,createdAt:new Date().toISOString(),authorName:user.name || user.phone}},201,headers);
    }
    if (path.startsWith("/api/")) return json({error:"مسیر API پیدا نشد."},404,headers);
    return env.ASSETS.fetch(request);
