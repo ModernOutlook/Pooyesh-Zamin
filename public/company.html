@@ -19,9 +19,10 @@ h1{margin:0 0 8px;font-size:1.6rem}.muted{color:#60757c;font-size:.9rem}input,bu
 <script>
 (() => {
   const tokenInput=document.getElementById("token"), status=document.getElementById("status"), records=document.getElementById("records"), more=document.getElementById("more");
+  const API_BASE="https://pooyesh-zamin.pages.dev";
   let cursor=0, accessToken="";
   const setStatus=(message)=>{status.textContent=message;};
-  async function api(path){const response=await fetch(path,{headers:{Authorization:"Bearer "+accessToken}});if(!response.ok){let message="درخواست ناموفق بود ("+response.status+")";try{message=(await response.json()).error||message}catch{}throw new Error(message)}return response;}
+  async function api(path){const response=await fetch(API_BASE+path,{mode:"cors",credentials:"omit",headers:{Authorization:"Bearer "+accessToken}});if(!response.ok){let message="درخواست ناموفق بود ("+response.status+")";try{message=(await response.json()).error||message}catch{}throw new Error(message)}return response;}
   function addText(parent,label,value){const p=document.createElement("p");const b=document.createElement("strong");b.textContent=label+"؛ ";p.append(b,document.createTextNode(value??"—"));parent.append(p);}
   async function load(reset){
     accessToken=tokenInput.value.trim();if(!accessToken){setStatus("توکن را وارد کنید.");return}

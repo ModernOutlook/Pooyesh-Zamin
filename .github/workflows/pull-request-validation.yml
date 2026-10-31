@@ -21,26 +21,23 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Check Worker JavaScript syntax
         run: node --check src/index.js
-      - name: Validate both interface entry points and switch persistence
+      - name: Validate single PWA interface and Cloudflare API integration
         run: |
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           import assert from 'node:assert/strict';
-          const light = fs.readFileSync('public/index.html', 'utf8');
-          const dark = fs.readFileSync('public/dark.html', 'utf8');
+          const html = fs.readFileSync('public/index.html', 'utf8');
           const sw = fs.readFileSync('public/sw.js', 'utf8');
-          for (const [name, html, target] of [
-            ['light', light, './dark.html'],
-            ['dark', dark, './index.html'],
-          ]) {
-            assert.match(html, /id="theme-switch"/, name + ' theme switch missing');
-            assert.match(html, /pooyesh-interface-v1/, name + ' preference key missing');
-            assert.ok(html.includes(target), name + ' switch target missing');
-            assert.match(html, /localStorage\.setItem/, name + ' preference persistence missing');
-          }
-          assert.match(sw, /dark\.html/, 'dark page must be in offline precache');
+          const company = fs.readFileSync('public/company.html', 'utf8');
+          assert.ok(!fs.existsSync('public/dark.html'), 'legacy dark page must be removed');
+          assert.doesNotMatch(html, /dark\.html|theme-switch|pooyesh-interface-v1/, 'main UI must not depend on legacy theme mechanism');
+          assert.match(html, /https:\/\/pooyesh-zamin\.pages\.dev/, 'Cloudflare API origin missing');
+          assert.match(html, /Authorization.*Bearer/, 'Bearer authentication missing');
+          assert.match(html, /auth-name/, 'registration profile fields missing');
+          assert.doesNotMatch(sw, /dark\.html/, 'service worker must not cache legacy page');
           assert.match(sw, /caches\.match\(r\)/, 'navigation fallback must respect requested path');
-          console.log('Both themes, preference persistence and offline navigation checks passed.');
+          assert.match(company, /https:\/\/pooyesh-zamin\.pages\.dev/, 'company API origin missing');
+          console.log('Single interface, API origin, account auth and offline navigation checks passed.');
           NODE
       - name: Wrangler configuration dry run
         run: npx wrangler@4 deploy --dry-run

@@ -3,7 +3,7 @@
 فرانت‌اند فارسی، راست‌چین و واکنش‌گرا برای ثبت پسماند خشک، مشارکت اجتماعی و نصب به‌صورت PWA روی Android و iOS؛ به‌همراه API، D1 و اپلیکیشن میدانی Android.
 
 ## امکانات
-- رابط روشن و تیره با انتخاب پایدار کاربر و پشتیبانی آفلاین PWA
+- رابط واحد فارسی و واکنش‌گرا با پشتیبانی آفلاین PWA
 - داشبورد وزن پسماند، ثبت پسماند، سوابق محلی و پیام‌های اجتماعی
 - API حساب، پروفایل، سوابق و پیام‌ها با نشست امن یا Bearer token
 - اپ Android برای ثبت GPS، پیوست تصویر، جست‌وجوی تصاویر OpenAerialMap و صف آفلاین با WorkManager
@@ -14,7 +14,7 @@
 - مسیر `functions/api/[[path]].js` درخواست‌های `/api/*` را به `src/index.js` می‌فرستد؛ D1 binding در تنظیمات Preview و Production پروژهٔ Pages قرار دارد.
 - اپ Android برای اتصال به API باید از نشانی Pages مانند `https://pooyesh-zamin.pages.dev` استفاده کند؛ این همان مبدأیی است که `/api/*` را ارائه می‌کند.
 - `wrangler.jsonc` تنظیمات استقرار مستقل Worker را نگه می‌دارد؛ R2 binding این فایل برای استقرار مستقل Worker است. برای Pages Functions، پس از ساخت bucket باید binding `MEDIA` را جداگانه در تنظیمات Functions پروژهٔ Pages برای Preview و Production ثبت کرد.
-- GitHub Pages فقط نسخهٔ استاتیک را ارائه می‌کند؛ API هم‌مبدأ در آن میزبان وجود ندارد و داده‌های محلی مهمان در همان مرورگر می‌مانند.
+- GitHub Pages فقط فایل‌های استاتیک را ارائه می‌کند؛ رابط اصلی از `https://pooyesh-zamin.pages.dev` برای API استفاده می‌کند. احراز هویت با Bearer token انجام می‌شود تا به کوکی شخص ثالث وابسته نباشد؛ داده‌های مهمان در همان مرورگر می‌مانند.
 - CORS فقط مبدأهای مشخص‌شده در Worker را می‌پذیرد؛ این محدودیت را برای دامنه‌های ناشناخته باز نکنید.
 
 ## D1 و migrationها
@@ -38,8 +38,11 @@ gradle -p android assembleDebug
 - secret با نام `COMPANY_ACCESS_TOKEN` باید در محیط Pages Functions ثبت شود؛ برای Pages از دستور `npx wrangler pages secret put COMPANY_ACCESS_TOKEN --project-name pooyesh-zamin` استفاده کنید.
 - مقدار secret را در کد، مخزن یا گفتگو قرار ندهید.
 
+## رابط و انتشار
+`public/index.html` تنها ورودی رابط وب است. صفحهٔ قدیمی `public/dark.html` و سازوکار جابه‌جایی بین دو نسخه حذف شده‌اند. Service Worker فقط رابط واحد و دارایی‌های آن را ذخیره می‌کند.
+
 ## اعتبارسنجی و انتشار
-GitHub Actions، syntax Worker، هر دو رابط PWA، تنظیمات Wrangler، اجرای ترتیبی migrationها روی SQLite موقت و ساخت APK آزمایشی را بررسی می‌کند. هر دو PR در 2026-10-31 ادغام شدند و انتشار خودکار Cloudflare Pages از شاخهٔ `main` آغاز شد.
+GitHub Actions، syntax Worker، رابط واحد PWA و اتصال API، تنظیمات Wrangler، اجرای ترتیبی migrationها روی SQLite موقت و ساخت APK آزمایشی را بررسی می‌کند. PRهای زیرساختی در 2026-10-31 ادغام شدند و انتشار خودکار Cloudflare Pages از شاخهٔ `main` آغاز شد.
 - R2 در حساب متصل هنوز فعال نیست؛ تا فعال‌سازی R2، ساخت bucket خصوصی `pooyesh-zamin-media` و افزودن binding با نام `MEDIA` به Pages Functions، بارگذاری تصاویر کار نخواهد کرد.
 - secret با نام `COMPANY_ACCESS_TOKEN` باید در محیط Pages Functions ثبت شود؛ مقدار secret را در کد، مخزن یا گفتگو قرار ندهید.
 - ادغام کد و migration D1 انجام شده است؛ تنظیم R2 و secret و آزمون دستگاه Android هنوز باقی است.

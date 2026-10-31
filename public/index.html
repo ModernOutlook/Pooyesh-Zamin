@@ -11,27 +11,9 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.8 Tahoma,"Segoe UI",sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}.app{max-width:1100px;margin:auto;padding:0 20px 90px}.top{height:78px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:900}.brand img{width:42px;height:48px;object-fit:contain;border-radius:10px}.brand small{display:block;font-size:10px;color:var(--muted);font-weight:400}.actions{display:flex;gap:8px;align-items:center}.btn{border:0;border-radius:13px;padding:10px 15px;font-weight:800}.primary{background:var(--green);color:white}.soft{background:var(--soft);color:var(--green)}.plain{background:white;border:1px solid var(--line)}.small{font-size:11px;padding:7px 11px}.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.hero-text{background:var(--green);color:white;padding:35px;border-radius:27px;display:flex;flex-direction:column;justify-content:center;min-height:275px}.eyebrow{color:#d8edc9;font-size:12px;font-weight:800}.hero h1{font-size:clamp(26px,4vw,40px);line-height:1.5;margin:12px 0}.hero p{font-size:13px;color:#e2eee5;margin:0 0 20px}.hero-art{background:var(--lime);border-radius:27px;display:grid;place-items:center;min-height:275px;position:relative;overflow:hidden}.earth{width:190px;height:190px;border-radius:50%;background:transparent;display:grid;place-items:center;box-shadow:0 20px 35px #286b4d22}.earth img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 15px #203b2c33)}.bubble{position:absolute;background:white;color:var(--green);padding:8px 12px;border-radius:13px;font-size:11px;font-weight:800;box-shadow:var(--shadow)}.b1{top:20px;left:20px}.b2{bottom:20px;right:20px}.head{display:flex;align-items:end;justify-content:space-between;margin:27px 2px 13px}.head h2{font-size:18px;margin:0}.head p{font-size:11px;color:var(--muted);margin:2px 0 0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat,.panel,.quick,.form{background:var(--paper);border:1px solid var(--line);border-radius:19px}.stat{padding:17px;display:flex;gap:12px;align-items:center}.ico{width:43px;height:43px;background:var(--soft);border-radius:14px;display:grid;place-items:center;font-size:21px}.stat strong{display:block;font-size:22px}.stat span{font-size:11px;color:var(--muted)}.quick-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.quick{padding:15px 8px;text-align:center}.quick i{font-style:normal;font-size:26px;display:block}.quick b{font-size:12px}.quick small{display:block;color:var(--muted);font-size:10px}.columns{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}.panel{padding:18px}.panel h3{font-size:15px;margin:0 0 12px}.activity{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f0f2ee;padding:9px 0;gap:8px}.activity:last-child{border:0}.activity small{display:block;color:var(--muted);font-size:10px}.activity b{color:var(--green);font-size:12px;white-space:nowrap}.empty{padding:20px;text-align:center;border:1px dashed #dce5da;border-radius:14px;color:var(--muted);font-size:12px}.page{display:none}.page.active{display:block}.intro{padding:24px 0 12px}.intro h1{margin:0;font-size:25px}.intro p{color:var(--muted);font-size:12px;margin:3px 0}.form{max-width:720px;padding:20px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:grid;gap:6px}.field label{font-size:12px;font-weight:800}.field input,.field select,.field textarea{width:100%;padding:11px 12px;border:1px solid #dfe6dc;border-radius:12px;background:#fbfcfa;outline:0}.field textarea{min-height:110px}.wide{grid-column:1/-1}.note{font-size:10px;color:var(--muted);margin:12px 0}.feed{display:grid;gap:10px}.post{background:white;border:1px solid var(--line);border-radius:16px;padding:15px}.post p{white-space:pre-wrap;font-size:12px}.meta{color:var(--muted);font-size:10px;display:flex;justify-content:space-between}.tag{background:#edf5eb;color:var(--green);border-radius:20px;padding:3px 9px;font-size:10px}.bottom{display:none}.modal{border:0;border-radius:20px;padding:22px;width:min(420px,calc(100% - 25px));box-shadow:var(--shadow)}.modal::backdrop{background:#17251b88}.modal h3{margin:0 0 15px}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;background:#203b2c;color:white;padding:10px 17px;border-radius:12px;font-size:12px;transition:.2s;z-index:20}.toast.show{opacity:1;transform:translate(-50%,0)}.footer{text-align:center;color:#96a197;font-size:10px;margin-top:30px}
 @media(max-width:700px){.app{padding:0 14px 100px}.hero{grid-template-columns:1fr;gap:10px}.hero-text{padding:25px;min-height:250px}.hero-art{min-height:175px}.earth{width:130px;height:148px}.stats{gap:7px}.stat{display:block;padding:11px 8px}.ico{width:34px;height:34px;margin-bottom:7px}.stat strong{font-size:18px}.stat span{font-size:9px}.quick-grid{grid-template-columns:repeat(3,1fr);gap:8px}.quick{padding:12px 6px}.columns{grid-template-columns:1fr}.fields{grid-template-columns:1fr}.wide{grid-column:auto}.top{height:68px}.brand{font-size:16px}.brand img{width:36px;height:42px}.actions .status{display:none}.bottom{position:fixed;display:grid;grid-template-columns:repeat(3,1fr);bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:7px 10px calc(7px + env(safe-area-inset-bottom));z-index:9}.bottom button{border:0;background:transparent;color:#89958b;font-size:10px}.bottom button span{font-size:20px;display:block}.bottom button.active{color:var(--green);font-weight:900}}
 </style>
-<script>
-(function(){
- const key='pooyesh-interface-v1';
- const darkPage=location.pathname.endsWith('/dark.html');
- try {
-  const saved=localStorage.getItem(key);
-  if(darkPage && saved==='light'){location.replace('./index.html');return;}
-  if(!darkPage && saved==='dark'){location.replace('./dark.html');return;}
-  if(!saved)localStorage.setItem(key,darkPage?'dark':'light');
- } catch (_) {}
- document.addEventListener('DOMContentLoaded',function(){
-  const link=document.getElementById('theme-switch');
-  if(link)link.addEventListener('click',function(){
-   try{localStorage.setItem(key,darkPage?'light':'dark')}catch(_){}
-  });
- });
-})();
-</script>
 </head>
 <body><div class="app">
-<header class="top"><a class="brand" href="#"><img src="./logo.png?v=20261031" alt="نشان پویش زمین"><span>پویش زمین<small>با هم برای زمین پاک‌تر</small></span></a><div class="actions"><span class="status" id="mode">ذخیره روی همین دستگاه</span><button class="btn plain small" id="install">＋ نصب برنامه</button><a class="btn soft small" id="theme-switch" href="./dark.html" aria-label="تغییر به رابط تیره و طلایی">تیره و طلایی</a><button class="btn primary small" id="auth-open">ورود / ثبت‌نام</button><button class="btn soft small" id="logout" hidden>خروج</button></div></header>
+<header class="top"><a class="brand" href="#"><img src="./logo.png?v=20261031" alt="نشان پویش زمین"><span>پویش زمین<small>با هم برای زمین پاک‌تر</small></span></a><div class="actions"><span class="status" id="mode">ذخیره روی همین دستگاه</span><button class="btn plain small" id="install">＋ نصب برنامه</button><button class="btn primary small" id="auth-open">ورود / ثبت‌نام</button><button class="btn soft small" id="logout" hidden>خروج</button></div></header>
 <main>
 <section class="page active" id="home">
 <div class="hero"><div class="hero-text"><span class="eyebrow">♻ پویش زمین؛ انتخابی برای آینده</span><h1>هر قدم کوچک،<br>تغییری بزرگ برای زمین</h1><p>پسماند خشک را جدا کن، وزنش را ثبت کن و سهم خودت را در ساختن شهری پاک‌تر ببین.</p><div><button class="btn" style="background:var(--lime);color:#244a36" data-go="record">ثبت پسماند من ←</button> <button class="btn plain" style="background:#ffffff18;color:white;border-color:#ffffff44" data-go="community">همراهان پویش</button></div></div><div class="hero-art"><div class="earth"><img src="./logo.png?v=20261031" alt="نشان پویش زمین" width="240" height="273" fetchpriority="high"></div><span class="bubble b1">تفکیک از مبدأ</span><span class="bubble b2">زمین، خانه‌ی ماست</span></div></div>
@@ -47,10 +29,10 @@
 <section class="page" id="community"><div class="intro"><h1>همراهان پویش</h1><p>ایده‌ها و تجربه‌های محیط‌زیستی را به اشتراک بگذار.</p></div><div class="columns"><div class="form"><h3>یک پیام سبز بنویس 🌱</h3><form id="post-form"><div class="field"><label>موضوع</label><select id="post-category"><option>تجربه‌ی بازیافت</option><option>پیشنهاد محیط‌زیستی</option><option>آموزش و آگاهی</option><option>عمومی</option></select></div><div class="field" style="margin-top:12px"><label>متن پیام</label><textarea id="post-content" maxlength="1000" placeholder="چه کاری برای زمین انجام داده‌ای؟" required></textarea></div><button class="btn primary" style="margin-top:12px">انتشار پیام</button></form><p class="note">در GitHub Pages پیام مهمان فقط روی همین دستگاه ذخیره می‌شود.</p></div><div><div class="head"><h2>پیام‌های تازه</h2><button class="btn plain small" id="refresh">به‌روزرسانی</button></div><div id="posts" class="feed"><div class="empty">هنوز پیامی منتشر نشده است.</div></div></div></div></section>
 </main><footer class="footer">پویش زمین · با مسئولیت‌پذیری امروز، برای فردای سبزتر</footer></div>
 <nav class="bottom"><button class="active" data-tab="home"><span>⌂</span>خانه</button><button data-tab="record"><span>＋</span>ثبت پسماند</button><button data-tab="community"><span>♧</span>همراهان</button></nav>
-<dialog class="modal" id="auth"><h3 id="auth-title">ورود به پویش زمین</h3><div class="tabs"><button type="button" data-mode="login">ورود</button> <button type="button" data-mode="register">ثبت‌نام</button></div><form id="auth-form"><div class="field"><label>شماره همراه</label><input id="phone" type="tel" autocomplete="tel" required></div><div class="field" style="margin-top:10px"><label>گذرواژه (حداقل ۱۰ نویسه)</label><input id="password" type="password" minlength="10" required></div><p class="note">ورود حساب فقط در نسخه‌ی مستقر روی سرویس اصلی فعال است.</p><button class="btn primary" id="auth-submit">ورود</button> <button class="btn plain" type="button" id="auth-close">بستن</button></form></dialog><div class="toast" id="toast" role="status"></div>
+<dialog class="modal" id="auth"><h3 id="auth-title">ورود به پویش زمین</h3><div class="tabs"><button type="button" data-mode="login">ورود</button> <button type="button" data-mode="register">ثبت‌نام</button></div><form id="auth-form"><div class="field"><label>شماره همراه</label><input id="phone" type="tel" autocomplete="tel" required></div><div class="field" style="margin-top:10px"><label>گذرواژه (حداقل ۱۰ نویسه)</label><input id="password" type="password" minlength="10" required></div><div id="register-fields" hidden><div class="field" style="margin-top:10px"><label>نام و نام خانوادگی</label><input id="auth-name" type="text" maxlength="120" autocomplete="name"></div><div class="field" style="margin-top:10px"><label>نوع حساب</label><select id="auth-account-type"><option value="home">مشترک خانگی</option><option value="collector">جمع‌آورنده / کسب‌وکار کوچک</option></select></div><div class="field" style="margin-top:10px"><label>نشانی (اختیاری)</label><input id="auth-address" type="text" maxlength="500" autocomplete="street-address"></div><div class="field" style="margin-top:10px"><label>ناحیه (اختیاری)</label><input id="auth-area" type="text" maxlength="120"></div></div><p class="note">حساب کاربری از طریق سرویس ابری پویش زمین مدیریت می‌شود.</p><button class="btn primary" id="auth-submit">ورود</button> <button class="btn plain" type="button" id="auth-close">بستن</button></form></dialog><div class="toast" id="toast" role="status"></div>
 <script>
 (function(){
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)], K='pooyesh.records.v1', P='pooyesh.posts.v1';
+const $=s=>document.querySelector(s), $=s=>[...document.querySelectorAll(s)], K='pooyesh.records.v1', P='pooyesh.posts.v1', AUTH='pooyesh.auth.token.v1';
 const symbols={'کاغذ و مقوا':'📦','پلاستیک':'🧴','فلزات':'🥫','شیشه':'🍾','الکترونیکی':'🔋','پارچه و منسوجات':'🧵','سایر':'♻️'};
 let local=read(K), posts=read(P), remote=[], remotePosts=[], backend=false, user=null, authMode='login', promptEvent=null, toastTimer;
 function read(k){try{let x=JSON.parse(localStorage.getItem(k)||'[]');return Array.isArray(x)?x:[]}catch(e){return[]}}
@@ -60,7 +42,16 @@ function fa(x){return new Intl.NumberFormat('fa-IR',{maximumFractionDigits:2}).f
 function date(x){try{return new Intl.DateTimeFormat('fa-IR',{dateStyle:'medium',timeStyle:'short'}).format(new Date(x))}catch(e){return '—'}}
 function toast(s){let t=$('#toast');t.textContent=s;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2600)}
 const API_BASE='https://pooyesh-zamin.pages.dev';
-async function api(path,options){let r=await fetch(API_BASE+path,Object.assign({credentials:'include',headers:{'content-type':'application/json'},mode:'cors'},options||{}));let d=await r.json().catch(()=>({}));if(!r.ok)throw Error(d.error||'خطا در ارتباط با سرویس');return d}
+async function api(path,options={}){
+ const headers=new Headers(options.headers||{});
+ const token=localStorage.getItem(AUTH);
+ if(token)headers.set('Authorization','Bearer '+token);
+ if(options.body && !(options.body instanceof FormData) && !headers.has('content-type'))headers.set('content-type','application/json');
+ const response=await fetch(API_BASE+path,{...options,headers,credentials:'omit',mode:'cors'});
+ const data=await response.json().catch(()=>({}));
+ if(!response.ok)throw Error(data.error||'خطا در ارتباط با سرویس');
+ return data;
+}
 function all(){return [...remote,...local].sort((a,b)=>new Date(b.created_at||b.createdAt)-new Date(a.created_at||a.createdAt))}
 function render(){let arr=all(), total=0, cats=new Set();arr.forEach(r=>{let items=r.items||[];total+=Number(r.weight)||items.reduce((s,i)=>s+Number(i.weight||0),0);if(r.category)cats.add(r.category);items.forEach(i=>cats.add(i.category||i.label))});$('#total').textContent=fa(total);$('#count').textContent=fa(arr.length);$('#types').textContent=fa(cats.size);$('#records-count').textContent=fa(arr.length)+' مورد';
 let html=arr.length?arr.map(r=>{let it=r.items||[], cat=r.category||(it[0]&&it[0].category)||'پسماند خشک', w=Number(r.weight)||it.reduce((s,i)=>s+Number(i.weight||0),0);return '<div class="activity"><div>'+ (symbols[cat]||'♻️')+' <b>'+esc(cat)+'</b><small>'+date(r.created_at||r.createdAt)+'</small></div><b>'+fa(w)+' کیلو</b></div>'}).join(''):'<div class="empty">هنوز رکوردی ثبت نشده است. 🌱</div>';$('#recent').innerHTML=html;$('#records').innerHTML=html;
@@ -75,9 +66,37 @@ $('#record-form').addEventListener('submit',async e=>{e.preventDefault();let cat
 $('#post-form').addEventListener('submit',async e=>{e.preventDefault();let p={content:$('#post-content').value.trim(),category:$('#post-category').value,createdAt:new Date().toISOString(),author:'من · مهمان'};if(!p.content)return;if(user){try{await api('/api/posts',{method:'POST',body:JSON.stringify(p)});toast('پیام منتشر شد');await loadPosts()}catch(err){toast(err.message);return}}else{posts.unshift(p);save();toast('پیام فقط روی این دستگاه ذخیره شد');render()}$('#post-content').value=''});
 $('#refresh').addEventListener('click',loadPosts);
 $('#auth-open').addEventListener('click',()=>$('#auth').showModal());$('#auth-close').addEventListener('click',()=>$('#auth').close());
-$$('[data-mode]').forEach(b=>b.addEventListener('click',()=>{authMode=b.dataset.mode;$('#auth-title').textContent=authMode==='login'?'ورود به پویش زمین':'ساخت حساب کاربری';$('#auth-submit').textContent=authMode==='login'?'ورود':'ثبت‌نام'}));
-$('#auth-form').addEventListener('submit',async e=>{e.preventDefault();if(!backend){toast('ورود حساب در GitHub Pages فعال نیست؛ حالت محلی فعال است');return}try{let d=await api('/api/auth/'+authMode,{method:'POST',body:JSON.stringify({phone:$('#phone').value,password:$('#password').value})});user=d.user;remote=(await api('/api/waste-records').catch(()=>({records:[]}))).records||[];$('#auth').close();render();toast('خوش آمدی')}catch(err){toast(err.message)}});
-$('#logout').addEventListener('click',async()=>{try{await api('/api/auth/logout',{method:'POST',body:'{}'})}catch(e){}user=null;remote=[];render();toast('از حساب خارج شدی')});
+function setAuthMode(mode){
+ authMode=mode;
+ const registering=mode==='register';
+ $('#register-fields').hidden=!registering;
+ $('#auth-name').required=registering;
+ $('#auth-title').textContent=registering?'ساخت حساب کاربری':'ورود به پویش زمین';
+ $('#auth-submit').textContent=registering?'ثبت‌نام':'ورود';
+}
+$('#auth [data-mode]').forEach(b=>b.addEventListener('click',()=>setAuthMode(b.dataset.mode)));
+$('#auth-form').addEventListener('submit',async e=>{
+ e.preventDefault();
+ if(!backend){toast('سرویس حساب کاربری موقتاً در دسترس نیست؛ داده‌ها به‌صورت محلی ذخیره می‌شوند');return}
+ const payload={phone:$('#phone').value.trim(),password:$('#password').value};
+ if(authMode==='register'){
+  payload.name=$('#auth-name').value.trim();
+  payload.accountType=$('#auth-account-type').value;
+  payload.address=$('#auth-address').value.trim();
+  payload.area=$('#auth-area').value.trim();
+ }
+ try{
+  const data=await api('/api/auth/'+authMode,{method:'POST',body:JSON.stringify(payload)});
+  if(data.access_token)localStorage.setItem(AUTH,data.access_token);
+  user=data.user;
+  remote=(await api('/api/waste-records').catch(()=>({records:[]}))).records||[];
+  $('#auth').close();$('#auth-form').reset();setAuthMode('login');render();toast('خوش آمدی');
+ }catch(err){toast(err.message)}
+});
+$('#logout').addEventListener('click',async()=>{
+ try{await api('/api/auth/logout',{method:'POST',body:'{}'})}catch(e){}
+ localStorage.removeItem(AUTH);user=null;remote=[];render();toast('از حساب خارج شدی');
+});
 $('#install').addEventListener('click',async()=>{if(promptEvent){promptEvent.prompt();await promptEvent.userChoice;promptEvent=null;return}toast(/iphone|ipad|ipod/i.test(navigator.userAgent)?'در Safari: Share و سپس Add to Home Screen را انتخاب کن.':'از منوی مرورگر گزینه Install app را انتخاب کن.')});
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();promptEvent=e});
 if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
