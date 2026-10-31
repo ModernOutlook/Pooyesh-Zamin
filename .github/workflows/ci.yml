@@ -2,42 +2,42 @@ name: CI
 
 on:
   pull_request:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
   worker-and-migrations:
-    name: Worker syntax and D1 migrations
+    name: Worker syntax, Wrangler config and D1 migrations
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
-      - run: npm install
+          node-version: '22'
       - name: Check Worker JavaScript syntax
         run: node --check src/index.js
       - name: Validate Wrangler configuration
-        run: npx wrangler deploy --dry-run
-      - name: Apply migrations to an ephemeral SQLite database
+        run: npx --yes wrangler@4 deploy --dry-run
+      - name: Apply D1 migrations to an ephemeral SQLite database
         run: |
           python - <<'PY'
           import pathlib, sqlite3
           db = sqlite3.connect(':memory:')
-          for path in sorted(pathlib.Path('migrations').glob('*.sql')):
+          migrations = sorted(pathlib.Path('migrations').glob('*.sql'))
+          assert len(migrations) == 3, f'Expected 3 migrations, found {len(migrations)}'
+          for path in migrations:
               db.executescript(path.read_text(encoding='utf-8'))
           tables = {row[0] for row in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
           assert {'users', 'sessions', 'waste_records', 'posts', 'location_records'} <= tables
           columns = {row[1] for row in db.execute('PRAGMA table_info(location_records)')}
           assert {'latitude', 'longitude', 'capture_height_m', 'image_key'} <= columns
-          print('D1 migrations applied successfully')
+          print('All D1 migrations applied successfully')
           PY
 
   android:
-    name: Android debug build
+    name: Android debug APK
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -54,5 +54,5 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
-      - name: Assemble debug APK
+      - name: Build debug APK
         run: gradle -p android assembleDebug
