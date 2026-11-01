@@ -2,8 +2,49 @@
 <html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>پنل مدیریت | پویش زمین</title>
 <style>
 :root{font-family:Tahoma,"Segoe UI",sans-serif;color:#173b35;background:#eef7f2}*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#e9f7ef,#eaf3fb);min-height:100vh}header{background:#07533f;color:#fff;padding:18px max(18px,calc((100% - 1180px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px}header strong{font-size:20px}main{width:min(1180px,94vw);margin:28px auto 60px}.panel{background:#fff;border:1px solid #d7e8df;border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 8px 24px #174d3a10}.hidden{display:none!important}h1,h2,h3{color:#07533f;margin-top:0}h1{font-size:27px}.muted{color:#638078;line-height:1.8}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.metric{background:#f1f8f4;border-radius:13px;padding:18px}.metric b{display:block;font-size:26px;color:#08764e;margin-top:8px}label{display:block;font-weight:700;margin:10px 0 6px}input,select,textarea{width:100%;padding:12px;border:1px solid #c7ddd2;border-radius:10px;background:#fff;font:inherit;color:#173b35}button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:11px 16px;background:#168a5a;color:white;font-weight:700}button.secondary{background:#e7f2ec;color:#145c45}button.danger{background:#a63b3b}button:disabled{opacity:.5;cursor:not-allowed}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.tools{display:grid;grid-template-columns:2fr 1fr;gap:12px}.load{border:1px solid #d8e9e0;border-radius:14px;padding:16px;margin:12px 0;background:#fbfefc}.loadhead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.pill{border-radius:30px;padding:5px 10px;background:#e8f2ed;color:#255d48;font-size:12px}.pill.assigned{background:#fff1cc;color:#785500}.pill.collected{background:#dcecff;color:#17548c}.pill.completed{background:#d8f3e4;color:#08623c}.load p{line-height:1.8;margin:8px 0}.load small{color:#638078}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions button{font-size:13px}.msg{padding:10px 12px;border-radius:10px;background:#eef7f2;color:#155d42;margin:10px 0}.error{background:#fff0ee;color:#9a3028}.history{border-top:1px dashed #cbded4;margin-top:12px;padding-top:10px;font-size:13px;line-height:1.9}.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:650px){.two,.tools{grid-template-columns:1fr}header{align-items:flex-start;flex-direction:column}}
+
+/* Shared Pooyesh Zamin visual system */
+:root{--pz-green:#178b59;--pz-deep:#07533f;--pz-blue:#147fc0;--pz-ink:#123b37;--pz-muted:#568078;--pz-glass:rgba(255,255,255,.78);--pz-line:rgba(255,255,255,.88)}
+html{min-height:100%;background:#bcecf0}
+body{min-height:100vh;color:var(--pz-ink);font-family:Tahoma,"Segoe UI",sans-serif;background:
+radial-gradient(ellipse at 78% 7%,rgba(255,255,255,.92) 0 2%,transparent 24%),
+radial-gradient(ellipse at 15% 12%,rgba(255,255,255,.62) 0 1%,transparent 25%),
+linear-gradient(180deg,#74d1f3 0%,#c9f1f4 43%,#f5f5d8 69%,#b6df9c 100%);background-attachment:fixed}
+body:before{content:"";position:fixed;z-index:-1;inset:30% -5% 0;pointer-events:none;opacity:.55;background:
+linear-gradient(150deg,transparent 0 20%,#8bc8df 20.2% 35%,transparent 35.2%),
+linear-gradient(30deg,transparent 0 40%,#9ed4e1 40.2% 55%,transparent 55.2%);clip-path:polygon(0 40%,12% 18%,23% 44%,36% 5%,49% 45%,62% 17%,76% 47%,88% 22%,100% 42%,100% 100%,0 100%)}
+header{position:relative;z-index:2;min-height:82px;padding:15px max(20px,calc((100% - 1180px)/2));display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--pz-deep);background:rgba(255,255,255,.62);border-bottom:1px solid var(--pz-line);box-shadow:0 8px 26px rgba(21,92,82,.09);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+header strong,header>b{font-size:clamp(17px,2vw,23px);font-weight:800;color:var(--pz-deep);text-shadow:0 1px 0 #fff9}
+header span{color:#1b625c;font-size:13px}
+.home-link{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;border:1px solid #ffffffd9;border-radius:999px;background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(232,255,247,.7));box-shadow:0 5px 18px #155c5217;color:#12574c;text-decoration:none;font:700 13px Tahoma,"Segoe UI",sans-serif;white-space:nowrap;transition:transform .18s,box-shadow .18s}
+.home-link:hover{transform:translateY(-2px);box-shadow:0 9px 22px #155c5226}
+main{position:relative;z-index:1;margin:clamp(18px,3vh,36px) auto 70px}
+.panel,.job,.load{border:1px solid var(--pz-line);border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.91),rgba(232,255,247,.67));box-shadow:0 12px 30px rgba(21,92,82,.12),inset 0 1px 0 #fff;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+h1,h2,h3{color:var(--pz-deep);text-shadow:0 1px 0 #fff8}
+.muted{color:#356b64;line-height:1.9}
+label{color:var(--pz-deep)}
+input,select,textarea{border:1px solid #b6dcd0;border-radius:11px;background:rgba(255,255,255,.88);color:var(--pz-ink);font:15px Tahoma,"Segoe UI",sans-serif;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#178b59;box-shadow:0 0 0 3px rgba(23,139,89,.13)}
+button,.btn{border:1px solid #ffffffd9;border-radius:12px;padding:11px 17px;background:linear-gradient(135deg,#1da969,#087db1);color:#fff;font:700 14px Tahoma,"Segoe UI",sans-serif;box-shadow:0 6px 16px rgba(19,139,113,.16);transition:transform .16s,box-shadow .16s,filter .16s}
+button:hover,.btn:hover{transform:translateY(-1px);box-shadow:0 9px 20px rgba(19,139,113,.22);filter:saturate(1.05)}
+button.secondary,.btn.alt{background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(232,255,247,.72));color:#12574c;border:1px solid #ffffffdf}
+button.danger{background:linear-gradient(135deg,#b94e4e,#8f303b);color:#fff}
+button:disabled,.btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.msg{border:1px solid #c9e6d8;border-radius:12px;background:#e7f6ed;color:#155d42;line-height:1.8}
+.error{border-color:#f0c9c4;background:#fff0ee;color:#9a3028}
+.grid{gap:14px}
+.metric{border:1px solid #c6e3d8;border-radius:16px;background:rgba(255,255,255,.68);text-align:center;color:#356b64}
+.metric b{color:#08764e}
+.pill,.badge{border-radius:999px;padding:6px 11px;background:#e8f2ed;color:#255d48;font-size:12px;font-weight:700}
+.loadhead,.row{gap:12px}
+.actions{gap:9px}
+.actions button{font-size:13px}
+#photoPreview{border:1px solid #ffffffd9;box-shadow:0 8px 20px #155c5217}
+@media(max-width:650px){header{padding:14px 16px;align-items:flex-start}header strong,header>b{font-size:17px}.home-link{margin-inline-start:auto}main{margin-top:16px}.panel,.job,.load{padding:16px;border-radius:17px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
 </style></head><body>
-<header><strong>♻ پویش زمین | پنل مدیریت</strong><span id="who">مدیریت بارهای مشترکین</span></header>
+<header><strong>♻ پویش زمین | پنل مدیریت</strong><span id="who">مدیریت بارهای مشترکین</span><a class="home-link" href="index.html">⌂ بازگشت به سامانه</a></header>
 <main>
 <section id="auth" class="panel"><h1>ورود مدیر سامانه</h1><p class="muted">دسترسی به این بخش فقط برای حساب مدیر مجاز است.</p>
 <div id="loginBox"><form id="loginForm"><label>نام کاربری</label><input name="username" autocomplete="username" required><label>گذرواژه</label><input name="password" type="password" autocomplete="current-password" required><button>ورود امن</button></form><button class="secondary" id="showBootstrap" type="button" style="margin-top:12px">راه‌اندازی مدیر اولیه</button></div>
