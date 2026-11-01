@@ -1,0 +1,16 @@
+{
+  "recordPath": "records/1405-08-10/001906-vyc76f8q2.json",
+  "patrol": "امیر شهریاری",
+  "address": "تتید، ستین، ساینین، ذذ، ۴۳",
+  "items": "",
+  "date": {
+    "jalali": "1405-08-10",
+    "time": "00:19:06",
+    "timezone": "Asia/Tehran",
+    "iso": "2026-10-31T20:49:06.036Z"
+  },
+  "note": "آزمایشی",
+  "assignedAt": "2026-11-01T19:54:52.658Z",
+  "assignedFa": "۱۴۰۵/۸/۱۰ ۲۳:۲۴",
+  "status": "assigned"
+}
