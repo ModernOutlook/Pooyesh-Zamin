@@ -38,7 +38,7 @@ function render(){
 }
 function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function date(v){try{return new Date(v).toLocaleString('fa-IR')}catch{return v||'—'}}
-async function refresh(){const [a,b]=await Promise.all([req('/api/admin/loads'),req('/api/admin/users')]);loads=a.loads||[];patrols=(b.users||[]).filter(x=>x.role==='patrol'&&x.is_active);render();$('users').innerHTML=(b.users||[]).map(u=>'<p>'+esc(u.display_name)+' — '+(u.role==='patrol'?'نیروی گشت':'مشترک')+' '+(u.is_active?'':'(غیرفعال)')+'</p>').join('')||'هنوز کاربری ایجاد نشده است.';}
+async function refresh(){const [a,b]=await Promise.all([req('/api/admin/loads'),req('/api/admin/users')]);loads=a.loads||[];patrols=(b.app_users||[]).filter(x=>x.role==='patrol'&&x.is_active);render();$('users').innerHTML=(b.app_users||[]).map(u=>'<p>'+esc(u.display_name)+' — '+(u.role==='patrol'?'نیروی گشت':'مشترک')+' '+(u.is_active?'':'(غیرفعال)')+'</p>').join('')||'هنوز کاربری ایجاد نشده است.';}
 async function enter(t){token=t;localStorage.setItem(KEY,t);const me=await req('/api/auth/me');if(me.user.role!=='admin')throw Error('این حساب دسترسی مدیر ندارد.');$('auth').classList.add('hidden');$('app').classList.remove('hidden');$('who').textContent='مدیر: '+me.user.display_name;await refresh();}
 $('loginForm').onsubmit=async e=>{e.preventDefault();try{const d=await req('/api/auth/login',{method:'POST',body:JSON.stringify(Object.fromEntries(new FormData(e.target)))});await enter(d.token);}catch(x){msg('authMsg',x.message,true)}};
 $('showBootstrap').onclick=()=>{$('loginBox').classList.add('hidden');$('bootstrapBox').classList.remove('hidden');};
