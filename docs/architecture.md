@@ -35,6 +35,7 @@
 - `POST /api/auth/login`
 - `GET /api/auth/me`
 - `POST /api/subscriber/loads`
+- `POST /api/admin/import-github-records` — انتقال تکرارنشدنی فایل‌های JSON قدیمی از پوشه `records`.
 - `GET /api/admin/loads`
 - `GET|POST /api/admin/users`
 - `POST /api/admin/loads/:id/assign`
