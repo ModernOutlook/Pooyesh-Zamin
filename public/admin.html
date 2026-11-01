@@ -191,7 +191,7 @@ main.invoice-page{width:min(1180px,94vw);margin:clamp(12px,3vh,36px) auto 110px}
 <header class="topbar"><button type="button" class="exit-button" id="topLogout">خروج</button></header>
 <main class="invoice-page">
 <div class="invoice-head"><h2>پنل مدیریت بارها</h2><p>مدیریت، ارجاع و پیگیری بارهای ارسالی در سامانه پویش زمین</p></div>
-<section id="auth" class="invoice-card auth-card" class="invoice-card"><h3 class="auth-title">ورود مدیر سامانه</h3><p class="muted">دسترسی به این بخش فقط برای حساب مدیر مجاز است.</p>
+<section id="auth" class="invoice-card auth-card"><h3 class="auth-title">ورود مدیر سامانه</h3><p class="muted">دسترسی به این بخش فقط برای حساب مدیر مجاز است.</p>
 <div id="loginBox"><form id="loginForm"><label>نام کاربری</label><input name="username" autocomplete="username" required><label>گذرواژه</label><input name="password" type="password" autocomplete="current-password" required><button>ورود امن</button></form><button class="secondary" id="showBootstrap" type="button" style="margin-top:12px">راه‌اندازی مدیر اولیه</button></div>
 <div id="bootstrapBox" class="hidden"><p class="muted">این مرحله فقط یک‌بار و برای ساخت نخستین مدیر استفاده می‌شود.</p><form id="bootstrapForm"><label>کلید راه‌اندازی یک‌بارمصرف</label><input name="key" required><label>نام نمایشی مدیر</label><input name="display_name" required><label>نام کاربری (لاتین)</label><input name="username" pattern="[A-Za-z0-9._-]{3,40}" required><label>گذرواژه (حداقل ۱۲ نویسه)</label><input name="password" type="password" minlength="12" required><button>ایجاد حساب مدیر</button></form><button class="secondary" id="showLogin" type="button" style="margin-top:10px">بازگشت به ورود</button></div>
 <div id="authMsg" class="msg hidden" role="status"></div></section>
