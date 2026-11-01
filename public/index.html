@@ -234,28 +234,27 @@
   .collection-head { text-align:center; margin-bottom:20px; }
   .collection-head h2 { margin:12px 0 6px; color:#07533f; font-size:clamp(28px,4vw,46px); text-shadow:0 2px 0 #fff9; }
   .collection-head p { margin:0; color:#205e62; line-height:1.8; }
-  .collection-card { padding:clamp(14px,2vw,24px); border:1px solid #ffffffdf; border-radius:22px; background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(232,255,247,.68)); box-shadow:0 12px 30px #155c5217; backdrop-filter:blur(12px); margin-bottom:16px; }
-  .collection-form { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)) auto; gap:12px; align-items:end; }
-  .collection-field { display:flex; flex-direction:column; gap:7px; }
-  .collection-field label { color:#07533f; font-weight:700; }
-  .collection-field input { width:100%; padding:12px 13px; border:1px solid #b6dcd0; border-radius:10px; background:#ffffffdf; color:#123b37; font:15px Tahoma,sans-serif; }
-  .collection-actions { display:flex; gap:8px; flex-wrap:wrap; }
+  .collection-toolbar { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:16px; padding:15px; border:1px solid #ffffffdf; border-radius:18px; background:#ffffffbd; }
+  .collection-toolbar input[type="search"] { flex:1; min-width:220px; padding:12px 14px; border:1px solid #b6dcd0; border-radius:10px; background:#ffffffdf; font:15px Tahoma,sans-serif; }
   .collection-action { border:1px solid #ffffffd9; border-radius:12px; padding:11px 15px; color:#fff; background:linear-gradient(135deg,#1da969,#087db1); font:600 14px Tahoma,sans-serif; cursor:pointer; white-space:nowrap; }
-  .collection-action.secondary { color:#12574c; background:#ffffffd9; }
-  .collection-toolbar { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
-  .collection-toolbar input[type="search"] { flex:1; min-width:220px; padding:11px 13px; border:1px solid #b6dcd0; border-radius:10px; background:#ffffffdf; font:15px Tahoma,sans-serif; }
   .collection-count { color:#568078; font-size:13px; }
-  .collection-table-wrap { overflow-x:auto; border-radius:12px; }
-  .collection-table { width:100%; min-width:760px; border-collapse:collapse; background:#ffffffa8; text-align:center; }
-  .collection-table th,.collection-table td { padding:10px 8px; border:1px solid #c6e3d8; vertical-align:middle; }
-  .collection-table th { background:#d9f2e7; color:#07533f; white-space:nowrap; }
-  .collection-table td:nth-child(3) { text-align:right; min-width:300px; line-height:1.8; }
-  .collection-row-actions { display:flex; justify-content:center; gap:6px; }
-  .collection-row-actions button { border:1px solid #c6e3d8; border-radius:8px; padding:7px 10px; cursor:pointer; font:13px Tahoma,sans-serif; background:#fff; color:#12574c; }
-  .collection-row-actions .danger { color:#a34848; }
-  .collection-empty { text-align:center; color:#568078; line-height:2; padding:25px; }
+  .collection-list { display:grid; gap:14px; }
+  .collection-record { padding:clamp(15px,2vw,22px); border:1px solid #ffffffdf; border-radius:20px; background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(232,255,247,.76)); box-shadow:0 10px 26px #155c5215; }
+  .collection-record-head { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:13px; padding-bottom:12px; border-bottom:1px solid #cfe5da; }
+  .collection-record-number { color:#07533f; font-size:18px; font-weight:800; }
+  .collection-record-time { color:#568078; font-size:13px; }
+  .collection-record-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px 18px; line-height:1.9; }
+  .collection-record-grid strong { color:#07533f; }
+  .collection-items { display:flex; flex-wrap:wrap; gap:7px; margin-top:12px; }
+  .collection-item-chip { padding:5px 10px; border-radius:999px; background:#e1f4e9; color:#17634c; font-size:13px; }
+  .collection-record-photo { display:block; width:min(100%,360px); max-height:260px; object-fit:cover; margin-top:13px; border-radius:12px; border:1px solid #c6e3d8; }
+  .collection-dispatch { display:flex; align-items:center; flex-wrap:wrap; gap:9px; margin-top:16px; padding-top:13px; border-top:1px solid #cfe5da; }
+  .collection-dispatch select { min-width:190px; max-width:100%; padding:10px 12px; border:1px solid #b6dcd0; border-radius:10px; background:#fff; color:#123b37; font:14px Tahoma,sans-serif; }
+  .collection-dispatch-status { color:#568078; font-size:13px; }
+  .collection-dispatch-status.assigned { color:#087347; font-weight:700; }
+  .collection-empty { text-align:center; color:#568078; line-height:2; padding:30px; border:1px dashed #b6dcd0; border-radius:16px; background:#ffffffa8; }
   .collection-note { margin:10px 0 0; color:#568078; font-size:12px; line-height:1.8; }
-  @media (max-width:760px) { .collection-form { grid-template-columns:1fr; } .collection-actions { width:100%; } .collection-action { flex:1; } }
+  @media (max-width:760px) { .collection-record-grid { grid-template-columns:1fr; } .collection-toolbar .collection-action { flex:1; } }
 
 
   .personnel-tools { display:flex; flex-wrap:wrap; align-items:end; gap:12px; margin:18px 0; }
@@ -575,32 +574,18 @@
 </section>
 
 
-<section id="collection-page" class="collection-page" hidden aria-label="صفحه جمع آوری از مبدا">
+<section id="collection-page" class="collection-page" hidden aria-label="ارسالی‌های مشترکین">
   <div class="collection-head">
-    <h2>جمع آوری از مبدا</h2>
-    <p>ثبت، ذخیره و بازیابی نشانی و شماره تماس هر کد اشتراک</p>
+    <h2>ارسالی‌های مشترکین</h2>
+    <p>فهرست بارهای ثبت‌شده در مخزن اطلاعات پویش زمین و ارجاع به نیروی گشت برای تحویل پسماند</p>
   </div>
-  <div class="collection-card">
-    <form class="collection-form" id="collection-form">
-      <div class="collection-field"><label for="collection-date">تاریخ ثبت (شمسی)</label><input id="collection-date" class="jalali-date" type="text" inputmode="numeric" placeholder="۱۴۰۵/۰۸/۰۴" required></div>
-      <div class="collection-field"><label for="subscription-code">کد اشتراک</label><input id="subscription-code" type="text" inputmode="numeric" autocomplete="off" placeholder="مثلاً ۱۲۳۴۵۶" required></div>
-      <div class="collection-field"><label for="subscription-phone">شماره تماس</label><input id="subscription-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="مثلاً ۰۹۱۲۱۲۳۴۵۶۷"></div>
-      <div class="collection-field"><label for="subscription-address">آدرس دقیق</label><input id="subscription-address" type="text" autocomplete="street-address" placeholder="آدرس کامل محل جمع‌آوری"></div>
-      <div class="collection-actions"><button type="submit" class="collection-action">ثبت / بروزرسانی</button><button type="button" class="collection-action secondary" id="clear-subscription">پاک کردن</button></div>
-    </form>
-    <p class="collection-note">هر کد اشتراک یک رکورد یکتا است؛ اگر کد موجود باشد، اطلاعات آن با اطلاعات جدید بروزرسانی می‌شود.</p>
+  <div class="collection-toolbar">
+    <input id="collection-search" type="search" autocomplete="off" placeholder="جست‌وجو در شماره بار، شناسه، نشانی یا اقلام پسماند..." aria-label="جست‌وجوی ارسال‌های مشترکین">
+    <span class="collection-count" id="collection-count">در حال بارگذاری…</span>
+    <button type="button" class="collection-action" id="refresh-collection">بروزرسانی فهرست</button>
   </div>
-  <div class="collection-card">
-    <div class="collection-toolbar">
-      <input id="collection-search" type="search" autocomplete="off" placeholder="جستجو بر اساس کد اشتراک، شماره تماس یا آدرس..." aria-label="جستجوی اطلاعات جمع آوری از مبدا">
-      <span class="collection-count" id="collection-count">۰ رکورد</span>
-      <input id="collection-excel" type="file" accept=".xlsx,.xls,.csv" hidden>
-      <button type="button" class="collection-action" id="import-collection">خواندن فایل اکسل</button>
-    </div>
-    <div class="collection-table-wrap"><table class="collection-table"><thead><tr><th>تاریخ ثبت</th><th>کد اشتراک</th><th>شماره تماس</th><th>آدرس دقیق</th><th>عملیات</th></tr></thead><tbody id="collection-rows"></tbody></table></div>
-    <div class="collection-empty" id="collection-empty">هنوز اطلاعاتی ثبت نشده است.</div>
-    <p class="collection-note">ساختار فایل اکسل: ستون اول «کد اشتراک»، ستون دوم «شماره تماس»، ستون سوم «آدرس دقیق». در صورت وجود ردیف عنوان، ردیف عنوان به‌صورت خودکار نادیده گرفته می‌شود.</p>
-  </div>
+  <div class="collection-list" id="collection-list" aria-live="polite"></div>
+  <p class="collection-note">شماره بار از شناسه یکتای ثبت مشترک ساخته می‌شود و ثابت می‌ماند. فهرست بر اساس زمان دقیق ثبت، از جدید به قدیم مرتب شده است. وضعیت ارجاع در حافظه همین مرورگر ذخیره می‌شود.</p>
 </section>
 
 <footer class="footer" aria-label="اطلاع‌رسانی">
@@ -1291,90 +1276,108 @@
   window.addEventListener('beforeprint',()=>{ if(lastPreparedInvoice) document.getElementById('invoice-print-area').hidden=false; });
   window.addEventListener('afterprint',()=>{ document.getElementById('invoice-print-area').hidden=true; });
 
-  // «جمع آوری از مبدا» — پایگاه داده محلی مرورگر + ورود اطلاعات از Excel
-  const COLLECTION_STORAGE_KEY = 'pooyesh-zamin.collection.v1';
-  const collectionForm = document.getElementById('collection-form');
-  const subscriptionCode = document.getElementById('subscription-code');
-  const subscriptionPhone = document.getElementById('subscription-phone');
-  const subscriptionAddress = document.getElementById('subscription-address');
+  // «ارسالی‌های مشترکین» — خواندن مستقیم فایل‌های JSON از مخزن records
+  const collectionList = document.getElementById('collection-list');
   const collectionSearch = document.getElementById('collection-search');
-  const collectionRows = document.getElementById('collection-rows');
-  const collectionEmpty = document.getElementById('collection-empty');
   const collectionCount = document.getElementById('collection-count');
-  const collectionExcel = document.getElementById('collection-excel');
-  let collectionRecords = loadCollectionRecords();
-
-  function normalizeCollectionText(value) { return String(value ?? '').replace(/\s+/g, ' ').trim(); }
-  function normalizeSubscriptionCode(value) { return normalizeCollectionText(toEnglishDigits(value)).replace(/\s+/g, ''); }
-  function loadCollectionRecords() {
-    try { const saved = JSON.parse(localStorage.getItem(COLLECTION_STORAGE_KEY) || '[]'); return Array.isArray(saved) ? saved.filter(item => item && item.code) : []; }
+  const COLLECTION_TREE_URL = 'https://api.github.com/repos/ModernOutlook/Pooyesh-Zamin/git/trees/main?recursive=1';
+  const COLLECTION_RAW_BASE = 'https://raw.githubusercontent.com/ModernOutlook/Pooyesh-Zamin/main/';
+  const COLLECTION_ASSIGNMENTS_KEY = 'pooyeshZaminPatrolAssignmentsV1';
+  let collectionRecords = [], collectionLoading = false;
+  function collectionPersian(value) { return String(value ?? '').replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]); }
+  function collectionText(value) { return String(value ?? '').replace(/\s+/g, ' ').trim(); }
+  function collectionAssignments() { try { return JSON.parse(localStorage.getItem(COLLECTION_ASSIGNMENTS_KEY) || '{}') || {}; } catch (_) { return {}; } }
+  function collectionPatrolMembers() {
+    try { const groups=JSON.parse(localStorage.getItem(personnelStorageKey)||'{}')||{}; return Array.isArray(groups['گشت'])?groups['گشت'].filter(p=>p&&p.id&&p.name):[]; }
     catch (_) { return []; }
   }
-  function persistCollectionRecords() { localStorage.setItem(COLLECTION_STORAGE_KEY, JSON.stringify(collectionRecords)); }
-  function escapeHtml(value) { return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])); }
-  function renderCollection() {
-    const query = normalizeCollectionText(collectionSearch.value).toLocaleLowerCase('fa');
-    const visible = collectionRecords.filter(item => {
-      const haystack = [item.date, item.code, item.phone, item.address].map(normalizeCollectionText).join(' ').toLocaleLowerCase('fa');
-      return !query || haystack.includes(query);
-    });
-    collectionRows.replaceChildren();
-    visible.forEach(item => {
-      const row = document.createElement('tr');
-      row.innerHTML = `<td>${escapeHtml(toPersianDigits(item.date || ''))}</td><td>${escapeHtml(toPersianDigits(item.code))}</td><td>${escapeHtml(toPersianDigits(item.phone || ''))}</td><td>${escapeHtml(item.address || '')}</td><td><div class="collection-row-actions"><button type="button" data-edit-code="${escapeHtml(item.code)}">ویرایش</button><button type="button" class="danger" data-delete-code="${escapeHtml(item.code)}">حذف</button></div></td>`;
-      collectionRows.appendChild(row);
-    });
-    collectionEmpty.hidden = visible.length > 0;
-    collectionCount.textContent = `${toPersianDigits(visible.length)} رکورد از ${toPersianDigits(collectionRecords.length)}`;
+  function collectionTimestamp(record) {
+    const iso=record?.date?.iso?Date.parse(record.date.iso):NaN;
+    if(Number.isFinite(iso)) return iso;
+    return Number(String(record?.date?.jalali||'').replace(/-/g,'')+String(record?.date?.time||'').replace(/:/g,''))||0;
   }
-  function clearCollectionForm() { collectionForm.reset(); const d=document.getElementById('collection-date'); if(d) d.value=toPersianDigits(todayJalali()); subscriptionCode.focus(); }
-  collectionForm.addEventListener('submit', event => {
-    event.preventDefault();
-    const code = normalizeSubscriptionCode(subscriptionCode.value);
-    if (!code) { alert('کد اشتراک را وارد کنید.'); subscriptionCode.focus(); return; }
-    const date = normalizeJalali(document.getElementById('collection-date').value.trim());
-    if (!parseJalaliDate(date)) { alert('تاریخ شمسی معتبر وارد کنید.'); return; }
-    const record = { code, phone: normalizeCollectionText(subscriptionPhone.value), address: normalizeCollectionText(subscriptionAddress.value), date };
-    const index = collectionRecords.findIndex(item => normalizeSubscriptionCode(item.code) === code);
-    if (index >= 0) collectionRecords[index] = record; else collectionRecords.push(record);
-    collectionRecords.sort((a,b) => a.code.localeCompare(b.code, 'fa', { numeric:true }));
-    persistCollectionRecords(); renderCollection(); clearCollectionForm();
-  });
-  document.getElementById('clear-subscription').addEventListener('click', clearCollectionForm);
-  collectionSearch.addEventListener('input', renderCollection);
-  collectionRows.addEventListener('click', event => {
-    const edit = event.target.closest('[data-edit-code]');
-    const remove = event.target.closest('[data-delete-code]');
-    if (edit) {
-      const code = edit.dataset.editCode, item = collectionRecords.find(record => record.code === code);
-      if (!item) return;
-      subscriptionCode.value = toPersianDigits(item.code); subscriptionPhone.value = toPersianDigits(item.phone || ''); subscriptionAddress.value = item.address || ''; document.getElementById('collection-date').value = item.date || todayJalali();
-      subscriptionCode.focus(); window.scrollTo({top:0, behavior:'smooth'});
-    }
-    if (remove) {
-      const code = remove.dataset.deleteCode;
-      if (!confirm(`رکورد کد اشتراک «${toPersianDigits(code)}» حذف شود؟`)) return;
-      collectionRecords = collectionRecords.filter(record => record.code !== code); persistCollectionRecords(); renderCollection();
-    }
-  });
-  document.getElementById('import-collection').addEventListener('click', () => collectionExcel.click());
-  collectionExcel.addEventListener('change', async () => {
-    const file = collectionExcel.files?.[0]; collectionExcel.value = ''; if (!file) return;
-    if (typeof XLSX === 'undefined') { alert('کتابخانه خواندن فایل اکسل بارگذاری نشده است. اتصال اینترنت را بررسی کنید.'); return; }
+  function collectionBarNumber(record) {
+    const id=String(record?.id||record?._file||'unknown').replace(/[^a-zA-Z0-9]/g,'').toUpperCase();
+    return 'BAR-'+(id||'UNKNOWN');
+  }
+  function collectionElement(tag,className,text) { const el=document.createElement(tag); if(className)el.className=className; if(text!==undefined)el.textContent=text; return el; }
+  async function loadCollectionRecords() {
+    if(collectionLoading)return;
+    collectionLoading=true; collectionCount.textContent='در حال دریافت اطلاعات…';
+    collectionList.replaceChildren(collectionElement('div','collection-empty','در حال خواندن اطلاعات ثبت‌شده در مخزن…'));
     try {
-      const data = await file.arrayBuffer(), workbook = XLSX.read(data, {type:'array'}), sheet = workbook.Sheets[workbook.SheetNames[0]];
-      const rows = XLSX.utils.sheet_to_json(sheet, {header:1, defval:'', raw:false}); let imported = 0, skipped = 0;
-      rows.forEach((row, index) => {
-        const code = normalizeSubscriptionCode(row?.[0]), phone = normalizeCollectionText(row?.[1]), address = normalizeCollectionText(row?.[2]);
-        if (!code || (index === 0 && /کد|اشتراک|subscription/i.test(String(row?.[0] || '')))) { skipped++; return; }
-        const record = {code, phone, address, date: document.getElementById('collection-date').value.trim() || todayJalali()}, existing = collectionRecords.findIndex(item => item.code === code);
-        if (existing >= 0) collectionRecords[existing] = record; else collectionRecords.push(record); imported++;
+      const treeResponse=await fetch(COLLECTION_TREE_URL,{cache:'no-store',headers:{'Accept':'application/vnd.github+json'}});
+      if(!treeResponse.ok)throw new Error('دریافت فهرست مخزن ناموفق بود ('+treeResponse.status+')');
+      const tree=await treeResponse.json();
+      if(tree.truncated)throw new Error('فهرست فایل‌های مخزن کامل دریافت نشد.');
+      const files=(tree.tree||[]).filter(e=>e.type==='blob'&&/^records\/.*\.json$/i.test(e.path));
+      const settled=await Promise.allSettled(files.map(async entry=>{
+        const response=await fetch(COLLECTION_RAW_BASE+entry.path,{cache:'no-store'});
+        if(!response.ok)throw new Error(entry.path+' ('+response.status+')');
+        return {...await response.json(),_file:entry.path};
+      }));
+      collectionRecords=settled.filter(x=>x.status==='fulfilled').map(x=>x.value).filter(x=>x&&(x.id||x.date)).sort((a,b)=>collectionTimestamp(b)-collectionTimestamp(a));
+      renderCollection();
+      const failed=settled.length-collectionRecords.length;
+      if(failed)collectionCount.textContent+=' — '+collectionPersian(failed)+' فایل ناخوانا';
+    } catch(error) {
+      console.error(error);
+      collectionList.replaceChildren(collectionElement('div','collection-empty','دریافت اطلاعات انجام نشد. اتصال اینترنت یا دسترسی عمومی مخزن را بررسی و دوباره تلاش کنید.'));
+      collectionCount.textContent='خطا در دریافت اطلاعات';
+    } finally { collectionLoading=false; }
+  }
+  function renderCollection() {
+    const query=collectionText(collectionSearch.value).toLocaleLowerCase('fa'), assignments=collectionAssignments();
+    const visible=collectionRecords.filter(record=>{
+      const haystack=[record.id,record.company,record.address,record.date?.jalali,record.date?.time,...(record.wasteItems||[])].join(' ').toLocaleLowerCase('fa');
+      return !query||haystack.includes(query);
+    });
+    collectionList.replaceChildren();
+    const members=collectionPatrolMembers();
+    visible.forEach(record=>{
+      const card=collectionElement('article','collection-record'),head=collectionElement('div','collection-record-head');
+      head.append(collectionElement('strong','collection-record-number','شماره بار: '+collectionBarNumber(record)),
+        collectionElement('span','collection-record-time','زمان ثبت: '+(collectionPersian([record.date?.jalali,record.date?.time].filter(Boolean).join(' • '))||'نامشخص')));
+      card.appendChild(head);
+      const grid=collectionElement('div','collection-record-grid');
+      [['مشترک / مجموعه',record.company||'ثبت نشده'],['شناسه ثبت',record.id||'—'],['نشانی محل تحویل',record.address||'ثبت نشده'],['تعداد اقلام',collectionPersian((record.wasteItems||[]).length)]].forEach(([label,value])=>{
+        const line=collectionElement('div'); line.append(collectionElement('strong','',label+': '),document.createTextNode(collectionPersian(value))); grid.appendChild(line);
       });
-      collectionRecords.sort((a,b) => a.code.localeCompare(b.code, 'fa', {numeric:true})); persistCollectionRecords(); renderCollection();
-      alert(`${toPersianDigits(imported)} رکورد از فایل اکسل خوانده و ذخیره شد${skipped ? `؛ ${toPersianDigits(skipped)} ردیف نادیده گرفته شد.` : '.'}`);
-    } catch (error) { console.error(error); alert('خواندن فایل اکسل انجام نشد. ساختار فایل یا فایل انتخاب‌شده را بررسی کنید.'); }
+      card.appendChild(grid);
+      if(Array.isArray(record.wasteItems)&&record.wasteItems.length){
+        const items=collectionElement('div','collection-items'); record.wasteItems.forEach(item=>items.appendChild(collectionElement('span','collection-item-chip',item))); card.appendChild(items);
+      }
+      if(record.photo){
+        const image=collectionElement('img','collection-record-photo');
+        image.src=/^https?:\/\//i.test(record.photo)?record.photo:COLLECTION_RAW_BASE+record.photo.replace(/^\//,'');
+        image.alt='تصویر پسماند ارسالی '+collectionBarNumber(record); image.loading='lazy'; image.onerror=()=>image.remove(); card.appendChild(image);
+      }
+      const dispatch=collectionElement('div','collection-dispatch');
+      dispatch.appendChild(collectionElement('strong','','تحویل به نیروی گشت:'));
+      const select=document.createElement('select'); select.dataset.assignRecord=String(record.id||record._file);
+      const placeholder=document.createElement('option'); placeholder.value=''; placeholder.textContent=members.length?'انتخاب نیروی گشت':'ابتدا نیروی گشت تعریف کنید'; select.appendChild(placeholder);
+      members.forEach(person=>{const option=document.createElement('option');option.value=String(person.id);option.textContent=person.name;select.appendChild(option);});
+      const saved=assignments[record.id||record._file]; if(saved?.memberId)select.value=String(saved.memberId); select.disabled=!members.length;
+      const button=collectionElement('button','collection-action','ثبت ارجاع');button.type='button';button.dataset.saveAssignment=String(record.id||record._file);button.disabled=!members.length;
+      const statusText=saved?.memberName?'ارجاع‌شده به '+saved.memberName+(saved.assignedAt?' — '+collectionPersian(new Date(saved.assignedAt).toLocaleString('fa-IR')):''):'هنوز به نیرویی ارجاع نشده است';
+      dispatch.append(select,button,collectionElement('span','collection-dispatch-status'+(saved?.memberId?' assigned':''),statusText)); card.appendChild(dispatch); collectionList.appendChild(card);
+    });
+    if(!visible.length)collectionList.appendChild(collectionElement('div','collection-empty',collectionRecords.length?'موردی با این عبارت پیدا نشد.':'هنوز ارسالی در مسیر records مخزن ثبت نشده است.'));
+    collectionCount.textContent=collectionPersian(visible.length)+' بار از '+collectionPersian(collectionRecords.length)+' بار ثبت‌شده';
+  }
+  collectionSearch.addEventListener('input',renderCollection);
+  document.getElementById('refresh-collection').addEventListener('click',loadCollectionRecords);
+  collectionList.addEventListener('click',event=>{
+    const button=event.target.closest('[data-save-assignment]'); if(!button)return;
+    const key=button.dataset.saveAssignment, select=[...collectionList.querySelectorAll('[data-assign-record]')].find(el=>el.dataset.assignRecord===key);
+    const member=collectionPatrolMembers().find(person=>String(person.id)===String(select?.value||''));
+    if(!member){alert('ابتدا یک نیروی گشت انتخاب کنید.');return;}
+    const assignments=collectionAssignments();
+    assignments[key]={memberId:String(member.id),memberName:member.name,assignedAt:new Date().toISOString(),recordId:key};
+    try{localStorage.setItem(COLLECTION_ASSIGNMENTS_KEY,JSON.stringify(assignments));renderCollection();}
+    catch(_){alert('ذخیره ارجاع در این مرورگر انجام نشد. فضای ذخیره‌سازی را بررسی کنید.');}
   });
-  renderCollection();
+  loadCollectionRecords();
 
 
   // تقویم شمسی تعاملی برای تمام ورودی‌های تاریخ سامانه
